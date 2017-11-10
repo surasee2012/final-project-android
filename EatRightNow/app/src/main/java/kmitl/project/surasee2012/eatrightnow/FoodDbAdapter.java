@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by Gun on 11/6/2017.
@@ -35,7 +36,7 @@ public class FoodDbAdapter {
 //        return id;
 //    }
 
-    public String getData() {
+    public ArrayList<String> getData() {
 //        SQLiteDatabase db = foodDB.getWritableDatabase();
 //        String[] columns = {FoodDB.ID, FoodDB.NAME};
 //        Cursor cursor =db.query(FoodDB.TABLE_NAME,columns,null,null,null,null,null);
@@ -45,9 +46,9 @@ public class FoodDbAdapter {
 //            String name =cursor.getString(cursor.getColumnIndex(FoodDB.NAME));
 //            buffer.append(cid+ "   " + name + " \n");
 //        }
-        String query = "SELECT * FROM Foods";
+        String query = "SELECT Food_Name, Food_Calories FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
-        StringBuffer buffer= new StringBuffer();
+        ArrayList<String> foodList = new ArrayList<>();
 
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
@@ -58,13 +59,13 @@ public class FoodDbAdapter {
 //                            .getColumnIndex("Food_Name")));
 
                     String foodName = c1.getString(c1.getColumnIndex("Food_Name"));
-                    buffer.append(foodName + " \n");
+                    foodList.add(foodName);
                 } while (c1.moveToNext());
             }
         }
         c1.close();
 
-        return buffer.toString();
+        return foodList;
     }
 
 //    public  int delete(String uname) {

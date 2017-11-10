@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Eat Right Now ?</string>
     <string name="random_food">สุ่มอาหาร</string>
-    <string name="view_calorie">ดูแคลอรี่</string>
+    <string name="food_list">ดูแคลอรี่</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
     <string name="random">สุ่ม</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -14,13 +14,17 @@ import android.widget.TextView;
 
 public class RandomFragment extends Fragment {
 
-    EditText editText;
-
     private RandomFragmentListener listener;
+    private static final String FOODNAME = "";
 
-    public static final RandomFragment newInstance(RandomFragmentListener listener){
+    public static final RandomFragment newInstance(String foodName, RandomFragmentListener listener){
         RandomFragment fragment = new RandomFragment();
         fragment.setListener(listener);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FOODNAME, foodName);
+        fragment.setArguments(bundle);
+
         return fragment;
     }
 
@@ -28,7 +32,12 @@ public class RandomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.random_fragment, container, false);
+
         Button randomBtn = rootView.findViewById(R.id.randomBtn);
+        TextView foodNameTv = rootView.findViewById(R.id.foodNameTv);
+
+        String foodName = getArguments().getString(FOODNAME);
+        foodNameTv.setText(foodName);
 
         randomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +53,6 @@ public class RandomFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        editText = getView().findViewById(R.id.searchEditText);
 
     }
 

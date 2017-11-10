@@ -14,17 +14,17 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:text="@string/random_food"
-        app:layout_constraintEnd_toStartOf="@+id/caloriesFragBtn"
+        app:layout_constraintEnd_toStartOf="@+id/foodListFragBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/caloriesFragBtn"
+        android:id="@+id/foodListFragBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:text="@string/view_calorie"
+        android:text="@string/food_list"
         app:layout_constraintEnd_toStartOf="@+id/profileFragBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/randomFragBtn"
@@ -39,7 +39,7 @@
         android:text="@string/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/caloriesFragBtn"
+        app:layout_constraintStart_toEndOf="@+id/foodListFragBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
@@ -52,6 +52,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/caloriesFragBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/foodListFragBtn" />
 
 </android.support.constraint.ConstraintLayout>

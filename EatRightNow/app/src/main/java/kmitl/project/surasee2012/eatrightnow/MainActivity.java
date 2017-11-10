@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RandomFragment.RandomFragmentListener {
+
+    FragmentManager fragmentManager;
 
     FoodDbAdapter foodDbAdapter;
 
@@ -18,25 +23,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         foodDbAdapter = new FoodDbAdapter(this);
 
-        Button randomFragBtn = (Button) findViewById(R.id.randomFragBtn);
+        Button randomFragBtn = findViewById(R.id.randomFragBtn);
+        Button foodListFragBtn = findViewById(R.id.foodListFragBtn);
+        Button profileFragBtn = findViewById(R.id.profileFragBtn);
 
         if(savedInstanceState == null) {
             initialFragment();
         }
 
         randomFragBtn.setOnClickListener(this);
+        foodListFragBtn.setOnClickListener(this);
+        profileFragBtn.setOnClickListener(this);
     }
 
     private void initialFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, RandomFragment.newInstance(MainActivity.this)).commit();
+                .add(R.id.fragmentContainer, RandomFragment.newInstance("",MainActivity.this)).commit();
     }
 
     @Override
     public void onClick(View view) {
         if (R.id.randomFragBtn == view.getId()) {
-            viewFragment(RandomFragment.newInstance(MainActivity.this));
+            viewFragment(RandomFragment.newInstance("", MainActivity.this));
+        } else if (R.id.foodListFragBtn == view.getId()) {
+            viewFragment(new FoodListFragment());
+        } else if (R.id.profileFragBtn == view.getId()) {
+            viewFragment(new ProfileFragment());
         }
     }
 
@@ -50,7 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void random() {
-        String data = foodDbAdapter.getData();
-        Message.message(this,data);
+        ArrayList<String> foodList = foodDbAdapter.getData();
+        Random random = new Random();
+        viewFragment(RandomFragment.newInstance(foodList.get(random.nextInt(foodList.size()))
+                , MainActivity.this));
+//        Message.message(this, foodList.get(random.nextInt(foodList.size())));
     }
 }
