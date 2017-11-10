@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Eat Right Now ?</string>
     <string name="random_food">สุ่มอาหาร</string>
-    <string name="food_list">ดูแคลอรี่</string>
+    <string name="food_list">ดูรายการอาหาร</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
     <string name="random">สุ่ม</string>
 

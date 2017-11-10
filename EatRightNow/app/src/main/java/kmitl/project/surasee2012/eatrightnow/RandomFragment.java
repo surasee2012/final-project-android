@@ -34,7 +34,7 @@ public class RandomFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.random_fragment, container, false);
 
         Button randomBtn = rootView.findViewById(R.id.randomBtn);
-        TextView foodNameTv = rootView.findViewById(R.id.foodNameTv);
+        TextView foodNameTv = rootView.findViewById(R.id.foodNameRandomTv);
 
         String foodName = getArguments().getString(FOODNAME);
         foodNameTv.setText(foodName);
