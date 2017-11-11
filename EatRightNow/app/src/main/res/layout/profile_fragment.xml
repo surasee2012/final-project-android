@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.surasee2012.eatrightnow.ProfileFragment">
+    tools:context="kmitl.project.surasee2012.eatrightnow.view.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

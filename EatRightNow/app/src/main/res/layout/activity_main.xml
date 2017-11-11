@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.surasee2012.eatrightnow.MainActivity">
+    tools:context="kmitl.project.surasee2012.eatrightnow.controller.MainActivity">
 
 
     <Button
@@ -47,8 +47,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

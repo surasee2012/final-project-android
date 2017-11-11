@@ -1,4 +1,4 @@
-package kmitl.project.surasee2012.eatrightnow;
+package kmitl.project.surasee2012.eatrightnow.model;
 
 /**
  * Created by Gun on 11/8/2017.

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.surasee2012.eatrightnow.RandomFragment">
+    tools:context="kmitl.project.surasee2012.eatrightnow.view.RandomFragment">
 
     <Button
         android:id="@+id/randomBtn"

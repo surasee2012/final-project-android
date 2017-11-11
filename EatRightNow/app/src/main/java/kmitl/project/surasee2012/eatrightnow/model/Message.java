@@ -1,4 +1,4 @@
-package kmitl.project.surasee2012.eatrightnow;
+package kmitl.project.surasee2012.eatrightnow.model;
 
 import android.content.Context;
 import android.widget.Toast;

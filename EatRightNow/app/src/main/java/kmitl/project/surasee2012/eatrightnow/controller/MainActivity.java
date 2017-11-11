@@ -1,4 +1,4 @@
-package kmitl.project.surasee2012.eatrightnow;
+package kmitl.project.surasee2012.eatrightnow.controller;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +9,12 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import kmitl.project.surasee2012.eatrightnow.view.ProfileFragment;
+import kmitl.project.surasee2012.eatrightnow.R;
+import kmitl.project.surasee2012.eatrightnow.view.RandomFragment;
+import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
+import kmitl.project.surasee2012.eatrightnow.view.FoodListFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RandomFragment.RandomFragmentListener {
 
@@ -34,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         randomFragBtn.setOnClickListener(this);
         foodListFragBtn.setOnClickListener(this);
         profileFragBtn.setOnClickListener(this);
+
+//        FoodListAdapter adapter = new FoodListAdapter();
+//        RecyclerView recyclerView = findViewById(R.id.list);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setAdapter(adapter);
     }
 
     private void initialFragment() {
