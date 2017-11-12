@@ -5,25 +5,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import kmitl.project.surasee2012.eatrightnow.R;
+import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
+import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 
-public class RandomFragment extends Fragment {
+public class RandomFragment extends Fragment implements View.OnClickListener
+        , AdapterView.OnItemSelectedListener{
 
-    private RandomFragmentListener listener;
-    private static final String FOODNAME = "";
+    private FoodDbAdapter foodDbAdapter;
 
-    public static final RandomFragment newInstance(String foodName, RandomFragmentListener listener){
-        RandomFragment fragment = new RandomFragment();
-        fragment.setListener(listener);
+    private TextView foodNameTv;
+    private TextView foodCalTv;
+    private Spinner tagSpinner;
 
-        Bundle bundle = new Bundle();
-        bundle.putString(FOODNAME, foodName);
-        fragment.setArguments(bundle);
+    private String[] tag_array;
 
-        return fragment;
+    public RandomFragment() {
     }
 
     @Override
@@ -31,27 +37,45 @@ public class RandomFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.random_fragment, container, false);
 
+        foodDbAdapter = new FoodDbAdapter(getContext());
+
+        foodNameTv = rootView.findViewById(R.id.foodNameRandomTv);
+        foodCalTv = rootView.findViewById(R.id.foodCalRandomTv);
+        foodNameTv.setText("");
+        foodCalTv.setText("");
+
         Button randomBtn = rootView.findViewById(R.id.randomBtn);
-        TextView foodNameTv = rootView.findViewById(R.id.foodNameRandomTv);
+        randomBtn.setOnClickListener(this);
 
-        String foodName = getArguments().getString(FOODNAME);
-        foodNameTv.setText(foodName);
+        tag_array = getResources().getStringArray(R.array.tags_array);
+        tagSpinner = rootView.findViewById(R.id.tagSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.tags_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tagSpinner.setAdapter(adapter);
+        tagSpinner.setOnItemSelectedListener(this);
 
-        randomBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.random();
-
-            }
-        });
         return rootView;
     }
 
-    public void setListener(RandomFragmentListener listener) {
-        this.listener = listener;
+    @Override
+    public void onClick(View view) {
+        ArrayList<FoodsListItems> foodList = foodDbAdapter.getData();
+        Random random = new Random();
+        int randomIndex = random.nextInt(foodList.size());
+
+        foodNameTv.setText(foodList.get(randomIndex).getFood_Name());
+        foodCalTv.setText(Integer.toString(foodList.get(randomIndex).getFood_Calories()) + " แคล/จาน");
     }
 
-    public interface RandomFragmentListener{
-        void random();
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        foodNameTv.setText(tag_array[i]);
     }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 }

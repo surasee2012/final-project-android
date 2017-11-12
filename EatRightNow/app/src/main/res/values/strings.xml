@@ -4,6 +4,18 @@
     <string name="food_list">ดูรายการอาหาร</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
     <string name="random">สุ่ม</string>
+    <string-array name="tags_array">
+        <item>ทั้งหมด</item>
+        <item>ไข่</item>
+        <item>ไก่, เป็ด</item>
+        <item>หมู</item>
+        <item>เนื้อ</item>
+        <item>ปลา</item>
+        <item>อาหารทะเลอื่น ๆ</item>
+        <item>ผัก, ผลไม้</item>
+        <item>ข้าว</item>
+        <item>เส้นก๋วยเตี๋ยว</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

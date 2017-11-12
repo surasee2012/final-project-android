@@ -36,7 +36,7 @@ public class FoodDbAdapter {
 //        return id;
 //    }
 
-    public ArrayList<String> getData() {
+    public ArrayList<FoodsListItems> getData() {
 //        SQLiteDatabase db = foodDB.getWritableDatabase();
 //        String[] columns = {FoodDB.ID, FoodDB.NAME};
 //        Cursor cursor =db.query(FoodDB.TABLE_NAME,columns,null,null,null,null,null);
@@ -48,18 +48,15 @@ public class FoodDbAdapter {
 //        }
         String query = "SELECT Food_Name, Food_Calories FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
-        ArrayList<String> foodList = new ArrayList<>();
+        ArrayList<FoodsListItems> foodList = new ArrayList<>();
 
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
                 do {
-//                    FoodsListItems foodsListItems = new FoodsListItems();
-//
-//                    foodsListItems.setFood_Name(c1.getString(c1
-//                            .getColumnIndex("Food_Name")));
-
-                    String foodName = c1.getString(c1.getColumnIndex("Food_Name"));
-                    foodList.add(foodName);
+                    FoodsListItems foodsListItems = new FoodsListItems();
+                    foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodList.add(foodsListItems);
                 } while (c1.moveToNext());
             }
         }
@@ -91,14 +88,11 @@ public class FoodDbAdapter {
         private static FoodDB instance;
         private static final int DATABASE_VERSION = 1;
 
-        private Context context;
         static Cursor cursor = null;
 
         FoodDB(Context context, String name, SQLiteDatabase.CursorFactory factory,
                int version) {
             super(context, name, factory, version);
-            this.context = context;
-
         }
 
         private static void initialize(Context context, String databaseName) {
