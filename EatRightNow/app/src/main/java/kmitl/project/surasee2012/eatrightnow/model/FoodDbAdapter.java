@@ -46,7 +46,7 @@ public class FoodDbAdapter {
 //            String name =cursor.getString(cursor.getColumnIndex(FoodDB.NAME));
 //            buffer.append(cid+ "   " + name + " \n");
 //        }
-        String query = "SELECT Food_Name, Food_Calories FROM Foods";
+        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
         ArrayList<FoodsListItems> foodList = new ArrayList<>();
 
@@ -56,6 +56,7 @@ public class FoodDbAdapter {
                     FoodsListItems foodsListItems = new FoodsListItems();
                     foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
                     foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
                     foodList.add(foodsListItems);
                 } while (c1.moveToNext());
             }
@@ -63,6 +64,53 @@ public class FoodDbAdapter {
         c1.close();
 
         return foodList;
+    }
+
+    public ArrayList<FoodsListItems> getData(String tagFilter, String specialFilter) {
+        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods";
+
+        if (!tagFilter.equals("ทั้งหมด")) {
+            query += " INNER JOIN Foods_Tags on Foods.Food_ID = Foods_Tags.Food_ID " +
+                    "INNER JOIN Tags on Foods_Tags.Tag_ID = Tags.Tag_ID " +
+                    "WHERE Tags.Tag_Title = '" + tagFilter + "';";
+        }
+        Cursor c1 = FoodDB.rawQuery(query);
+        ArrayList<FoodsListItems> foodList = new ArrayList<>();
+
+        if (c1 != null && c1.getCount() != 0) {
+            if (c1.moveToFirst()) {
+                do {
+                    FoodsListItems foodsListItems = new FoodsListItems();
+                    foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodList.add(foodsListItems);
+                } while (c1.moveToNext());
+            }
+        }
+        c1.close();
+
+        return foodList;
+    }
+
+    public String[] getTags() {
+        String query = "SELECT Tag_Title FROM Tags";
+        Cursor c1 = FoodDB.rawQuery(query);
+        ArrayList<String> TagList = new ArrayList<>();
+        TagList.add("ทั้งหมด");
+
+        if (c1 != null && c1.getCount() != 0) {
+            if (c1.moveToFirst()) {
+                do {
+                    TagList.add(c1.getString(c1.getColumnIndex("Tag_Title")));
+                } while (c1.moveToNext());
+            }
+        }
+        c1.close();
+
+        String[] TagArray = TagList.toArray(new String[TagList.size()]);
+
+        return TagArray;
     }
 
 //    public  int delete(String uname) {

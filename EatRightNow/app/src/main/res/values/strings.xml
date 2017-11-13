@@ -14,7 +14,12 @@
         <item>อาหารทะเลอื่น ๆ</item>
         <item>ผัก, ผลไม้</item>
         <item>ข้าว</item>
-        <item>เส้นก๋วยเตี๋ยว</item>
+        <item>เส้นก๋วยเตี๋ยว </item>
+    </string-array>
+    <string-array name="special_array">
+        <item>ไม่มี</item>
+        <item>ของโปรด</item>
+        <item>แคลอรี่ที่เหมาะสม</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -8,6 +8,7 @@ public class FoodsListItems {
 
     private String Food_Name;
     private int Food_Calories;
+    private int Food_Favorite;
 
     public String getFood_Name() {
         return Food_Name;
@@ -23,5 +24,13 @@ public class FoodsListItems {
 
     public void setFood_Calories(int food_Calories) {
         Food_Calories = food_Calories;
+    }
+
+    public int getFood_Favorite() {
+        return Food_Favorite;
+    }
+
+    public void setFood_Favorite(int food_Favorite) {
+        Food_Favorite = food_Favorite;
     }
 }

@@ -22,12 +22,14 @@
         android:id="@+id/foodNameRandomTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="164dp"
         android:text="TextView"
         android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/tagSpinner"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,19 +46,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodNameRandomTv" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="56dp"
+        android:text="วัตถุดิบ"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Spinner
         android:id="@+id/tagSpinner"
-        android:layout_width="289dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="68dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/specialSpinner"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginStart="56dp"
+        android:text="ตัวเลือกเพิ่มเติม"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/randomBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodCalRandomTv"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/specialSpinner"
+        android:layout_width="150dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/randomBtn"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
 </android.support.constraint.ConstraintLayout>
