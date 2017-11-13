@@ -9,23 +9,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import kmitl.project.surasee2012.eatrightnow.R;
-import kmitl.project.surasee2012.eatrightnow.model.FoodListAdapter;
+import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
+import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 
 
 public class FoodListFragment extends Fragment {
 
-
     public FoodListFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.food_list_fragment, container, false);
 
-        FoodListAdapter foodListAdapter = new FoodListAdapter();
+        FoodDbAdapter foodDbAdapter = new FoodDbAdapter(getContext());
+        ArrayList<FoodsListItems> foodList = foodDbAdapter.getData();
+
+        FoodListAdapter foodListAdapter = new FoodListAdapter(getContext(), foodList);
         RecyclerView recyclerView = rootView.findViewById(R.id.foodList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

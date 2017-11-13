@@ -24,13 +24,12 @@ import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 public class RandomFragment extends Fragment implements View.OnClickListener
         , AdapterView.OnItemSelectedListener{
 
-    private FoodDbAdapter foodDbAdapter;
-
     private TextView foodNameTv;
     private TextView foodCalTv;
     private Spinner tagSpinner;
     private Spinner specialSpinner;
 
+    private FoodDbAdapter foodDbAdapter;
     private ArrayList<FoodsListItems> foodList;
     private String[] tag_array;
     private String[] special_array;
@@ -57,7 +56,6 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         randomBtn.setOnClickListener(this);
 
         tag_array = getResources().getStringArray(R.array.tags_array);
-        tag_array = foodDbAdapter.getTags();
         tagSpinner = rootView.findViewById(R.id.tagSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
                 R.array.tags_array, android.R.layout.simple_spinner_item);
@@ -78,15 +76,20 @@ public class RandomFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        Random random = new Random();
-        int randomIndex;
-        do {
-            randomIndex = random.nextInt(foodList.size());
-        } while (randomIndex == previousIndex);
+        try {
+            Random random = new Random();
+            int randomIndex;
+            do {
+                randomIndex = random.nextInt(foodList.size());
+            } while (randomIndex == previousIndex);
 //        int randomIndex = random.nextInt(foodList.size());
-        previousIndex = randomIndex;
-        foodNameTv.setText(foodList.get(randomIndex).getFood_Name());
-        foodCalTv.setText(Integer.toString(foodList.get(randomIndex).getFood_Calories()) + " แคล/จาน");
+            previousIndex = randomIndex;
+            foodNameTv.setText(foodList.get(randomIndex).getFood_Name());
+            foodCalTv.setText(Integer.toString(foodList.get(randomIndex).getFood_Calories()) + " แคล/จาน");
+        } catch (Exception e) {
+            Alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+        }
+
     }
 
     @Override
@@ -98,25 +101,29 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         }
         previousIndex = -1;
         foodList = foodDbAdapter.getData(tagFilter, specialFilter);
-//        foodNameTv.setText("");
-//        foodCalTv.setText("");
+        foodNameTv.setText("");
+        foodCalTv.setText("");
         if (foodList.isEmpty()) {
-            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-            alertDialog.setTitle("Alert");
-            alertDialog.setMessage("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+            Alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void Alert(String warnning) {
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(warnning);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
 }

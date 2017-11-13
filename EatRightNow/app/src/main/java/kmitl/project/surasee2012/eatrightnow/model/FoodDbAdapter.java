@@ -56,7 +56,7 @@ public class FoodDbAdapter {
                     FoodsListItems foodsListItems = new FoodsListItems();
                     foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
                     foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodsListItems.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
                     foodList.add(foodsListItems);
                 } while (c1.moveToNext());
             }
@@ -91,26 +91,6 @@ public class FoodDbAdapter {
         c1.close();
 
         return foodList;
-    }
-
-    public String[] getTags() {
-        String query = "SELECT Tag_Title FROM Tags";
-        Cursor c1 = FoodDB.rawQuery(query);
-        ArrayList<String> TagList = new ArrayList<>();
-        TagList.add("ทั้งหมด");
-
-        if (c1 != null && c1.getCount() != 0) {
-            if (c1.moveToFirst()) {
-                do {
-                    TagList.add(c1.getString(c1.getColumnIndex("Tag_Title")));
-                } while (c1.moveToNext());
-            }
-        }
-        c1.close();
-
-        String[] TagArray = TagList.toArray(new String[TagList.size()]);
-
-        return TagArray;
     }
 
 //    public  int delete(String uname) {
