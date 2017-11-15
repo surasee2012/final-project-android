@@ -6,9 +6,18 @@ package kmitl.project.surasee2012.eatrightnow.model;
 
 public class FoodsListItems {
 
+    private int Food_ID;
     private String Food_Name;
     private int Food_Calories;
     private int Food_Favorite;
+
+    public int getFood_ID() {
+        return Food_ID;
+    }
+
+    public void setFood_ID(int food_ID) {
+        Food_ID = food_ID;
+    }
 
     public String getFood_Name() {
         return Food_Name;

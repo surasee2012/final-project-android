@@ -21,32 +21,14 @@ import java.util.ArrayList;
 
 public class FoodDbAdapter {
 
-    FoodDB foodDB;
     private static final String DB_NAME = "EatRightNow_DB.db";
 
     public FoodDbAdapter(Context context) {
-        foodDB = FoodDB.getInstance(context, DB_NAME);
+        FoodDB.getInstance(context, DB_NAME);
     }
 
-//    public long insertData(String name, String pass) {
-//        SQLiteDatabase dbb = foodDB.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(FoodDB.NAME, name);
-//        long id = dbb.insert(FoodDB.TABLE_NAME, null , contentValues);
-//        return id;
-//    }
-
     public ArrayList<FoodsListItems> getData() {
-//        SQLiteDatabase db = foodDB.getWritableDatabase();
-//        String[] columns = {FoodDB.ID, FoodDB.NAME};
-//        Cursor cursor =db.query(FoodDB.TABLE_NAME,columns,null,null,null,null,null);
-//        StringBuffer buffer= new StringBuffer();
-//        while (cursor.moveToNext()) {
-//            int cid =cursor.getInt(cursor.getColumnIndex(FoodDB.ID));
-//            String name =cursor.getString(cursor.getColumnIndex(FoodDB.NAME));
-//            buffer.append(cid+ "   " + name + " \n");
-//        }
-        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods";
+        String query = "SELECT * FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
         ArrayList<FoodsListItems> foodList = new ArrayList<>();
 
@@ -54,6 +36,7 @@ public class FoodDbAdapter {
             if (c1.moveToFirst()) {
                 do {
                     FoodsListItems foodsListItems = new FoodsListItems();
+                    foodsListItems.setFood_ID(c1.getInt(c1.getColumnIndex("Food_ID")));
                     foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
                     foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
                     foodsListItems.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
@@ -67,7 +50,7 @@ public class FoodDbAdapter {
     }
 
     public ArrayList<FoodsListItems> getData(String tagFilter, String specialFilter) {
-        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods";
+        String query = "SELECT Food_Name, Food_Calories FROM Foods";
 
         if (!tagFilter.equals("ทั้งหมด")) {
             query += " INNER JOIN Foods_Tags on Foods.Food_ID = Foods_Tags.Food_ID " +
@@ -83,7 +66,6 @@ public class FoodDbAdapter {
                     FoodsListItems foodsListItems = new FoodsListItems();
                     foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
                     foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
                     foodList.add(foodsListItems);
                 } while (c1.moveToNext());
             }
@@ -93,22 +75,11 @@ public class FoodDbAdapter {
         return foodList;
     }
 
-//    public  int delete(String uname) {
-//        SQLiteDatabase db = foodDB.getWritableDatabase();
-//        String[] whereArgs ={uname};
-//
-//        int count =db.delete(FoodDB.TABLE_NAME ,FoodDB.NAME+" = ?",whereArgs);
-//        return  count;
-//    }
-//
-//    public int updateName(String oldName , String newName) {
-//        SQLiteDatabase db = foodDB.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(FoodDB.NAME,newName);
-//        String[] whereArgs= {oldName};
-//        int count =db.update(FoodDB.TABLE_NAME,contentValues, FoodDB.NAME+" = ?",whereArgs );
-//        return count;
-//    }
+    public void setFavorite(int foodID, int favoriteValue) {
+        String UpdateQuery = "UPDATE Foods SET Food_Favorite = " + Integer.toString(favoriteValue)
+                + " WHERE Food_ID = " + Integer.toString(foodID) + ";";
+        FoodDB.execute(UpdateQuery);
+    }
 
     static class FoodDB extends SQLiteOpenHelper {
 

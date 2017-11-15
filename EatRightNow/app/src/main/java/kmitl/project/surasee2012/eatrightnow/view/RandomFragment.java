@@ -20,6 +20,7 @@ import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.controller.MainActivity;
 import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
 import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
+import kmitl.project.surasee2012.eatrightnow.model.Message;
 
 public class RandomFragment extends Fragment implements View.OnClickListener
         , AdapterView.OnItemSelectedListener{
@@ -36,9 +37,6 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     private String tagFilter;
     private String specialFilter;
     private int previousIndex;
-
-    public RandomFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,12 +80,11 @@ public class RandomFragment extends Fragment implements View.OnClickListener
             do {
                 randomIndex = random.nextInt(foodList.size());
             } while (randomIndex == previousIndex);
-//        int randomIndex = random.nextInt(foodList.size());
             previousIndex = randomIndex;
             foodNameTv.setText(foodList.get(randomIndex).getFood_Name());
             foodCalTv.setText(Integer.toString(foodList.get(randomIndex).getFood_Calories()) + " แคล/จาน");
         } catch (Exception e) {
-            Alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+            Message.alert(getContext(), "ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
         }
 
     }
@@ -104,7 +101,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         foodNameTv.setText("");
         foodCalTv.setText("");
         if (foodList.isEmpty()) {
-            Alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+            Message.alert(getContext(), "ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
         }
     }
 
@@ -112,18 +109,4 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
-    public void Alert(String warnning) {
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage(warnning);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
 }
