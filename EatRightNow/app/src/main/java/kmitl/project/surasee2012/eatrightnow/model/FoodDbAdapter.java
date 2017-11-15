@@ -51,12 +51,20 @@ public class FoodDbAdapter {
 
     public ArrayList<FoodsListItems> getData(String tagFilter, String specialFilter) {
         String query = "SELECT Food_Name, Food_Calories FROM Foods";
-
-        if (!tagFilter.equals("ทั้งหมด")) {
-            query += " INNER JOIN Foods_Tags on Foods.Food_ID = Foods_Tags.Food_ID " +
-                    "INNER JOIN Tags on Foods_Tags.Tag_ID = Tags.Tag_ID " +
-                    "WHERE Tags.Tag_Title = '" + tagFilter + "';";
+        if (specialFilter.equals("ทั้งหมด")) {
+            query += " INNER JOIN Foods_Tags ON Foods.Food_ID = Foods_Tags.Food_ID" +
+                    " INNER JOIN Tags ON Foods_Tags.Tag_ID = Tags.Tag_ID" +
+                    " WHERE Tags.Tag_Title = '" + tagFilter + "'";
+            if (specialFilter.equals("ของโปรด")) {
+                query += " AND Foods.Food_Favorite = 1";
+            }
+        } else {
+            if (specialFilter.equals("ของโปรด")) {
+                query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
+            }
         }
+        query += ";";
+
         Cursor c1 = FoodDB.rawQuery(query);
         ArrayList<FoodsListItems> foodList = new ArrayList<>();
 

@@ -69,6 +69,9 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         specialSpinner.setAdapter(adapter2);
         specialSpinner.setOnItemSelectedListener(this);
 
+        tagFilter = "ทั้งหมด";
+        specialFilter = "ไม่มี";
+
         return rootView;
     }
 
@@ -79,7 +82,10 @@ public class RandomFragment extends Fragment implements View.OnClickListener
             int randomIndex;
             do {
                 randomIndex = random.nextInt(foodList.size());
-            } while (randomIndex == previousIndex);
+            } while (randomIndex == previousIndex && foodList.size() > 1);
+            if (foodList.size() == 1 && randomIndex == previousIndex) {
+                Message.alert(getContext(), "ขออภัย รายการอาหารที่ตรงกับตัวเลือกของคุณมีแค่ 1 รายการ");
+            }
             previousIndex = randomIndex;
             foodNameTv.setText(foodList.get(randomIndex).getFood_Name());
             foodCalTv.setText(Integer.toString(foodList.get(randomIndex).getFood_Calories()) + " แคล/จาน");
@@ -93,7 +99,8 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if (R.id.tagSpinner == adapterView.getId()) {
             tagFilter = tag_array[i];
-        } else if (R.id.specialSpinner == adapterView.getId()) {
+        }
+        if (R.id.specialSpinner == adapterView.getId()) {
             specialFilter = special_array[i];
         }
         previousIndex = -1;
