@@ -81,14 +81,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
         foodHolder.favoriteImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (foodList.get(position).getFood_Favorite()) { //Bug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                switch (foodList.get(position).getFood_Favorite()) {
                     case 0:
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 1);
+                        foodList.get(position).setFood_Favorite(1);
                         Glide.with(context).load(favoriteImgId).into(favoriteImg);
                         Message.message(context, "เพิ่ม" + foodList.get(position).getFood_Name() + "ในของโปรดเรียบร้อยแล้ว");
                         break;
                     case 1:
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 0);
+                        foodList.get(position).setFood_Favorite(0);
                         Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
                         Message.message(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากโปรดเรียบร้อยแล้ว");
                         break;

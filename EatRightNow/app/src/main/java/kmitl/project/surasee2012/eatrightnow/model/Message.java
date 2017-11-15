@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class Message {
 
     public static void message(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     public static void alert(Context context, String warnning) {
