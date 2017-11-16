@@ -1,12 +1,11 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Gun on 11/6/2017.
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class FoodDbAdapter {
 
     private static final String DB_NAME = "EatRightNow_DB.db";
+
+    private int previousRandomIndex = -1;
 
     public FoodDbAdapter(Context context) {
         FoodDB.getInstance(context, DB_NAME);
@@ -51,16 +53,16 @@ public class FoodDbAdapter {
 
     public ArrayList<FoodsListItems> getData(String tagFilter, String specialFilter) {
         String query = "SELECT Food_Name, Food_Calories FROM Foods";
-        if (specialFilter.equals("ทั้งหมด")) {
+        if (tagFilter.equals("ทั้งหมด")) {
+            if (specialFilter.equals("ของโปรด")) {
+                query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
+            }
+        } else {
             query += " INNER JOIN Foods_Tags ON Foods.Food_ID = Foods_Tags.Food_ID" +
                     " INNER JOIN Tags ON Foods_Tags.Tag_ID = Tags.Tag_ID" +
                     " WHERE Tags.Tag_Title = '" + tagFilter + "'";
             if (specialFilter.equals("ของโปรด")) {
                 query += " AND Foods.Food_Favorite = 1";
-            }
-        } else {
-            if (specialFilter.equals("ของโปรด")) {
-                query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
             }
         }
         query += ";";
@@ -81,6 +83,33 @@ public class FoodDbAdapter {
         c1.close();
 
         return foodList;
+    }
+
+    public FoodRandom getRandom(ArrayList<FoodsListItems> foodList) {
+        FoodRandom foodRandom = new FoodRandom();
+        try {
+            Random random = new Random();
+            int randomIndex;
+            do {
+                randomIndex = random.nextInt(foodList.size());
+            } while (randomIndex == previousRandomIndex && foodList.size() > 1);
+            if (foodList.size() == 1 && randomIndex == previousRandomIndex) {
+                foodRandom.setErrorCollector(1);
+                return foodRandom;
+            }
+            previousRandomIndex = randomIndex;
+            foodRandom.setFood_Name(foodList.get(randomIndex).getFood_Name());
+            foodRandom.setFood_Calories(foodList.get(randomIndex).getFood_Calories());
+        } catch (Exception e) {
+            foodRandom.setErrorCollector(2);
+            return foodRandom;
+        }
+        foodRandom.setErrorCollector(0);
+        return foodRandom;
+    }
+
+    public void setPreviousRandomIndex(int previousRandomIndex) {
+        this.previousRandomIndex = previousRandomIndex;
     }
 
     public void setFavorite(int foodID, int favoriteValue) {

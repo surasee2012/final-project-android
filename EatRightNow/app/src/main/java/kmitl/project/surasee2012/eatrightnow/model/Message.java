@@ -12,20 +12,46 @@ import android.widget.Toast;
 
 public class Message {
 
-    public static void message(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    private Toast toast;
+    private AlertDialog alertDialog;
+
+    public Message(Context context) {
+        toast = new Toast(context);
+        alertDialog = new AlertDialog.Builder(context).create();
     }
 
-    public static void alert(Context context, String warning) {
-        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage(warning);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+    public void setToast(Context context, String message) {
+        toast.cancel();
+        toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void alert(String warning) {
+        if (!alertDialog.isShowing()) {
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage(warning);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+    }
+
+    public void alert(int randomResult) {
+        switch (randomResult) {
+            case 1:
+                alert("ขออภัย รายการอาหารที่ตรงกับตัวเลือกของคุณมีแค่ 1 รายการ");
+                break;
+            case 2:
+                alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+                break;
+        }
+    }
+
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
     }
 }

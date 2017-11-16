@@ -44,6 +44,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
     private Context context;
 
     private FoodDbAdapter foodDbAdapter;
+    private Message message;
     private ArrayList<FoodsListItems> foodList;
     private int favoriteImgId;
     private int noFavoriteImgId;
@@ -62,7 +63,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
     public FoodHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View ItemView = inflater.inflate(R.layout.food_item, null, false);
+
         final FoodHolder foodHolder = new FoodHolder(ItemView);
+        message = new Message(context);
 
         foodHolder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -86,13 +89,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 1);
                         foodList.get(position).setFood_Favorite(1);
                         Glide.with(context).load(favoriteImgId).into(favoriteImg);
-                        Message.message(context, "เพิ่ม" + foodList.get(position).getFood_Name() + "ในของโปรดเรียบร้อยแล้ว");
+                        message.setToast(context, "เพิ่ม" + foodList.get(position).getFood_Name() + "ในของโปรดเรียบร้อยแล้ว");
                         break;
                     case 1:
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 0);
                         foodList.get(position).setFood_Favorite(0);
                         Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
-                        Message.message(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากโปรดเรียบร้อยแล้ว");
+                        message.setToast(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากโปรดเรียบร้อยแล้ว");
                         break;
                 }
             }
