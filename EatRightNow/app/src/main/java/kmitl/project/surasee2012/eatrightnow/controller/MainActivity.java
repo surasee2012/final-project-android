@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Button randomFragBtn = findViewById(R.id.randomFragBtn);
         Button foodListFragBtn = findViewById(R.id.foodListFragBtn);
         Button profileFragBtn = findViewById(R.id.profileFragBtn);

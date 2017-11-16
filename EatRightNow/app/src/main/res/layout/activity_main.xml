@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="kmitl.project.surasee2012.eatrightnow.controller.MainActivity">
 
-
     <Button
         android:id="@+id/randomFragBtn"
         android:layout_width="0dp"
