@@ -2,7 +2,6 @@ package kmitl.project.surasee2012.eatrightnow.model;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 

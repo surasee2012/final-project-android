@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">Eat Right Now ?</string>
+    <string name="app_name">EatRightNow?</string>
     <string name="random_food">สุ่มอาหาร</string>
     <string name="food_list">ดูรายการอาหาร</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
     <string name="random">สุ่ม</string>
     <string-array name="tags_array">
         <item>ทั้งหมด</item>

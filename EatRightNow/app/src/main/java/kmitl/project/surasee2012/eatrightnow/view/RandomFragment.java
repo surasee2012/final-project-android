@@ -1,14 +1,11 @@
 package kmitl.project.surasee2012.eatrightnow.view;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.hardware.Sensor;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import kmitl.project.surasee2012.eatrightnow.R;
-import kmitl.project.surasee2012.eatrightnow.controller.MainActivity;
 import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
 import kmitl.project.surasee2012.eatrightnow.model.FoodRandom;
 import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
@@ -49,6 +43,11 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     private String[] special_array;
     private String tagFilter;
     private String specialFilter;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +95,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener
 
         tagFilter = "ทั้งหมด";
         specialFilter = "ไม่มี";
+        foodList = foodDbAdapter.getData("ทั้งหมด", "ไม่มี");
 
         return rootView;
     }

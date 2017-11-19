@@ -10,11 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
-import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 
 
 public class FoodListFragment extends Fragment {
