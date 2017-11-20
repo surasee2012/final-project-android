@@ -52,7 +52,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.random_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_random, container, false);
 
         foodDbAdapter = new FoodDbAdapter(getContext());
         message = new Message(getContext());
@@ -139,6 +139,14 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     public void onPause() {
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getView()!=null){
+            foodList = foodDbAdapter.getData(tagFilter, specialFilter);
+        }
     }
 
     public void random() {

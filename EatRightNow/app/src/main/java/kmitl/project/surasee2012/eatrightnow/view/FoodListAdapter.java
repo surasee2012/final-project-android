@@ -67,8 +67,8 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
         foodHolder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.add(foodHolder.getAdapterPosition(), 0, 0, "เพิ่มจำนวนเงิน");
-                menu.add(foodHolder.getAdapterPosition(), 1, 0, "ลบรายการ");
+                menu.add(foodHolder.getAdapterPosition(), 0, 0, "แก้ไขอาหาร");
+                menu.add(foodHolder.getAdapterPosition(), 1, 0, "ลบอาหาร");
             }
         });
 
