@@ -59,7 +59,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
     @Override
     public FoodHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View ItemView = inflater.inflate(R.layout.food_item, null, false);
+        View ItemView = inflater.inflate(R.layout.food_item, parent, false);
 
         final FoodHolder foodHolder = new FoodHolder(ItemView);
         message = new Message(context);
@@ -103,7 +103,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
             Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
         }
         foodHolder.foodNameItem.setText(foodList.get(position).getFood_Name());
-        foodHolder.foodCalItem.setText(Integer.toString(foodList.get(position).getFood_Calories()));
+        foodHolder.foodCalItem.setText(Integer.toString(foodList.get(position).getFood_Calories()) + " แคลอรี่");
     }
 
     @Override

@@ -39,9 +39,6 @@ public class FoodListFragment extends Fragment {
         switch (item.getItemId()){
             case 0:
                 Intent intent = new Intent(getContext(), AddEditActivity.class);
-//                EditText editText = (EditText) findViewById(R.id.editText);
-//                String message = editText.getText().toString();
-//                intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
                 break;
             case 1:
