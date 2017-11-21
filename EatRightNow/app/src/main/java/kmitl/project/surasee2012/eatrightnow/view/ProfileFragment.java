@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.model.CommonSharePreference;
@@ -97,10 +96,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         userProfile.setAge(userAge);
 
         preference.save("UserProfile", userProfile);
-
-        UserProfile testUserProfile = (UserProfile) preference.read("UserProfile", UserProfile.class);
-        Toast.makeText(getActivity(), testUserProfile.toString(),
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override

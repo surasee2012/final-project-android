@@ -22,10 +22,12 @@ public class FoodDbAdapter {
 
     private static final String DB_NAME = "EatRightNow_DB.db";
 
+    private Context context;
     private int previousRandomIndex = -1;
 
     public FoodDbAdapter(Context context) {
         FoodDB.getInstance(context, DB_NAME);
+        this.context = context;
     }
 
     public ArrayList<FoodsListItems> getData() {
@@ -55,6 +57,10 @@ public class FoodDbAdapter {
         if (tagFilter.equals("ทั้งหมด")) {
             if (specialFilter.equals("ของโปรด")) {
                 query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
+            } else if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
+                double bestCal = getBestCal();
+                query += " WHERE Food_Calories > " + String.valueOf(bestCal)
+                        + " - 100 AND Food_Calories < " + String.valueOf(bestCal) + " + 100";
             }
         } else {
             query += " INNER JOIN Foods_Tags ON Foods.Food_ID = Foods_Tags.Food_ID" +
@@ -62,6 +68,10 @@ public class FoodDbAdapter {
                     " WHERE Tags.Tag_Title = '" + tagFilter + "'";
             if (specialFilter.equals("ของโปรด")) {
                 query += " AND Foods.Food_Favorite = 1";
+            } else if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
+                double bestCal = getBestCal();
+                query += " AND Food_Calories > " + String.valueOf(bestCal)
+                        + " - 100 AND Food_Calories < " + String.valueOf(bestCal) + " + 100";
             }
         }
         query += ";";
@@ -82,6 +92,58 @@ public class FoodDbAdapter {
         c1.close();
 
         return foodList;
+    }
+
+    private double getBestCal() {
+        CommonSharePreference preference = new CommonSharePreference(context);
+        UserProfile userProfile = (UserProfile) preference.read("UserProfile", UserProfile.class);
+        double bmr = 0;
+        double tdee = 0;
+        switch (userProfile.getGender()) {
+            case "ชาย":
+                bmr = 66 + (13.7 * userProfile.getWeight()) + (5 * userProfile.getHieght())
+                        - (6.8 * userProfile.getAge());
+                switch (userProfile.getUserActivity()) {
+                    case "นั่งทำงานอยู่กับที่":
+                        tdee = bmr * 1.2;
+                        break;
+                    case "เดินบ้างเล็กน้อย ทำงานออฟฟิศ":
+                        tdee = bmr * 1.375;
+                        break;
+                    case "เคลื่อนไหวตลอดเวลา":
+                        tdee = bmr * 1.55;
+                        break;
+                    case "เล่นกีฬาอย่างหนัก":
+                        tdee = bmr * 1.725;
+                        break;
+                    case "นักกีฬา ทำงานที่ใช้แรงงานมาก":
+                        tdee = bmr * 1.9;
+                        break;
+                }
+                break;
+            case "หญิง" :
+                bmr = 665 + (9.6 * userProfile.getWeight()) + (1.8 * userProfile.getHieght())
+                        - (4.7 * userProfile.getAge());
+                switch (userProfile.getUserActivity()) {
+                    case "นั่งทำงานอยู่กับที่":
+                        tdee = bmr * 1.2;
+                        break;
+                    case "เดินบ้างเล็กน้อย ทำงานออฟฟิศ":
+                        tdee = bmr * 1.375;
+                        break;
+                    case "เคลื่อนไหวตลอดเวลา":
+                        tdee = bmr * 1.55;
+                        break;
+                    case "เล่นกีฬาอย่างหนัก":
+                        tdee = bmr * 1.725;
+                        break;
+                    case "นักกีฬา ทำงานที่ใช้แรงงานมาก":
+                        tdee = bmr * 1.9;
+                        break;
+                }
+                break;
+        }
+        return (tdee * 0.8) / 3;
     }
 
     public FoodRandomItem getRandom(ArrayList<FoodsListItems> foodList) {
