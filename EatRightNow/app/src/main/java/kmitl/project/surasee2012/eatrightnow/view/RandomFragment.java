@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
-import kmitl.project.surasee2012.eatrightnow.model.FoodRandom;
+import kmitl.project.surasee2012.eatrightnow.model.FoodRandomItem;
 import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.ShakeEventListener;
 
-public class RandomFragment extends Fragment implements View.OnClickListener
-        , AdapterView.OnItemSelectedListener {
+public class RandomFragment extends Fragment implements View.OnClickListener,
+        AdapterView.OnItemSelectedListener {
 
     private TextView foodNameTv;
     private TextView foodCalTv;
@@ -45,11 +45,6 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     private String specialFilter;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_random, container, false);
@@ -63,7 +58,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         foodNameTv.setText("");
         foodCalTv.setText("");
 
-        final Button randomBtn = rootView.findViewById(R.id.randomBtn);
+        Button randomBtn = rootView.findViewById(R.id.randomBtn);
         randomBtn.setOnClickListener(this);
 
         tag_array = getResources().getStringArray(R.array.tags_array);
@@ -107,10 +102,13 @@ public class RandomFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (R.id.tagSpinner == adapterView.getId()) {
-            tagFilter = tag_array[i];
-        } else if (R.id.specialSpinner == adapterView.getId()) {
-            specialFilter = special_array[i];
+        switch (adapterView.getId()) {
+            case R.id.tagSpinner:
+                tagFilter = tag_array[i];
+                break;
+            case R.id.specialSpinner:
+                specialFilter = special_array[i];
+                break;
         }
         foodDbAdapter.setPreviousRandomIndex(-1);
         foodList = foodDbAdapter.getData(tagFilter, specialFilter);
@@ -123,9 +121,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
+    public void onNothingSelected(AdapterView<?> adapterView) {}
 
     @Override
     public void onResume() {
@@ -146,16 +142,18 @@ public class RandomFragment extends Fragment implements View.OnClickListener
         super.setUserVisibleHint(isVisibleToUser);
         if(getView()!=null){
             foodList = foodDbAdapter.getData(tagFilter, specialFilter);
+            foodNameTv.setText("");
+            foodCalTv.setText("");
         }
     }
 
     public void random() {
-        FoodRandom foodRandom = foodDbAdapter.getRandom(foodList);
-        if (foodRandom.getErrorCollector() > 0) {
-            message.alert(foodRandom.getErrorCollector());
+        FoodRandomItem foodRandomItem = foodDbAdapter.getRandom(foodList);
+        if (foodRandomItem.getErrorCollector() > 0) {
+            message.alert(foodRandomItem.getErrorCollector());
         } else {
-            foodNameTv.setText(foodRandom.getFood_Name());
-            foodCalTv.setText(Integer.toString(foodRandom.getFood_Calories()) + " แคล/จาน");
+            foodNameTv.setText(foodRandomItem.getFood_Name());
+            foodCalTv.setText(Integer.toString(foodRandomItem.getFood_Calories()) + " แคล/จาน");
         }
         vibrator.vibrate(200);
     }

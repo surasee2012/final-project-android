@@ -4,7 +4,7 @@ package kmitl.project.surasee2012.eatrightnow.model;
  * Created by Gun on 11/17/2017.
  */
 
-public class FoodRandom {
+public class FoodRandomItem {
 
     private String Food_Name;
     private int Food_Calories;

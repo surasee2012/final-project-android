@@ -84,8 +84,8 @@ public class FoodDbAdapter {
         return foodList;
     }
 
-    public FoodRandom getRandom(ArrayList<FoodsListItems> foodList) {
-        FoodRandom foodRandom = new FoodRandom();
+    public FoodRandomItem getRandom(ArrayList<FoodsListItems> foodList) {
+        FoodRandomItem foodRandom = new FoodRandomItem();
         try {
             Random random = new Random();
             int randomIndex;
