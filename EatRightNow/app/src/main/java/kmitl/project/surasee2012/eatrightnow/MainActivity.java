@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kmitl.project.surasee2012.eatrightnow.view.FoodListFragment;
 import kmitl.project.surasee2012.eatrightnow.view.ProfileFragment;
@@ -26,7 +27,6 @@ import kmitl.project.surasee2012.eatrightnow.view.RandomFragment;
 public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     private ViewPager mViewPager;
 
     @Override
@@ -45,7 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

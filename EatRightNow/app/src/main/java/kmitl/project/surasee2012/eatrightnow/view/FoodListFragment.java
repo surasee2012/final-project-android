@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ public class FoodListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_food_list, container, false);
 
+        setHasOptionsMenu(true);
+
         FoodDbAdapter foodDbAdapter = new FoodDbAdapter(getContext());
 
         FoodListAdapter foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
@@ -32,6 +36,13 @@ public class FoodListFragment extends Fragment {
         recyclerView.setAdapter(foodListAdapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        inflater.inflate(R.menu.add_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -47,5 +58,4 @@ public class FoodListFragment extends Fragment {
         }
         return super.onContextItemSelected(item);
     }
-
 }

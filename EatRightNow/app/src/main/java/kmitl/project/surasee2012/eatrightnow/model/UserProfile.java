@@ -6,33 +6,33 @@ package kmitl.project.surasee2012.eatrightnow.model;
 
 public class UserProfile {
 
-    private double weight;
-    private double hieght;
-    private int age;
+    private Double weight;
+    private Double hieght;
+    private Integer age;
     private String gender;
     private String userActivity;
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public double getHieght() {
+    public Double getHieght() {
         return hieght;
     }
 
-    public void setHieght(double hieght) {
+    public void setHieght(Double hieght) {
         this.hieght = hieght;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

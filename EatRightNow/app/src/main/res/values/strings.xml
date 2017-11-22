@@ -4,6 +4,8 @@
     <string name="food_list">ดูรายการอาหาร</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
     <string name="random">สุ่ม</string>
+    <string name="find_more">ค้นหาเพิ่มเติม</string>
+    <string name="recommend_restaurant">แนะนำร้าน</string>
     <string-array name="tags_array">
         <item>ทั้งหมด</item>
         <item>ไข่</item>

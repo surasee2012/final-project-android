@@ -10,14 +10,12 @@
         android:id="@+id/foodNameRandomTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
         android:text="TextView"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/tagSpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +36,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
         android:text="วัตถุดิบ"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -49,8 +47,8 @@
         android:id="@+id/tagSpinner"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="12dp"
         app:layout_constraintBottom_toTopOf="@+id/specialSpinner"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
@@ -58,8 +56,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="136dp"
-        android:layout_marginLeft="56dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="64dp"
         android:text="ตัวเลือกเพิ่มเติม"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/randomBtn"
@@ -69,20 +67,45 @@
         android:id="@+id/specialSpinner"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="136dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="12dp"
         app:layout_constraintBottom_toTopOf="@+id/randomBtn"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/findMoreBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/find_more"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/randomBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/randomBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/random"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="OnClick" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/recomResBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/recommend_restaurant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/randomBtn"
+        android:visibility="gone" />
 
 </android.support.constraint.ConstraintLayout>

@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.surasee2012.eatrightnow.view.FoodListFragment">
+    tools:context="kmitl.project.surasee2012.eatrightnow.view.FoodListFragment" >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/foodList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

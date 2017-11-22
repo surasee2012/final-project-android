@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.model.CommonSharePreference;
+import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.UserProfile;
 
 
@@ -31,6 +32,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     private Spinner activitySpinner;
 
     private CommonSharePreference preference;
+    private Message message;
     private UserProfile userProfile;
     private String[] gender_array;
     private String[] activity_array;
@@ -40,6 +42,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        message = new Message(getContext());
         preference = new CommonSharePreference(getContext());
         userProfile = (UserProfile) preference.read("UserProfile", UserProfile.class);
 
@@ -87,15 +90,19 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onClick(View view) {
-        double userWeight = Double.parseDouble(weightEdt.getText().toString());
-        double userHeight = Double.parseDouble(heightEdt.getText().toString());
-        int userAge = Integer.parseInt(ageEdt.getText().toString());
+        try {
+            Double userWeight = Double.parseDouble(weightEdt.getText().toString());
+            Double userHeight = Double.parseDouble(heightEdt.getText().toString());
+            Integer userAge = Integer.parseInt(ageEdt.getText().toString());
 
-        userProfile.setWeight(userWeight);
-        userProfile.setHieght(userHeight);
-        userProfile.setAge(userAge);
+            userProfile.setWeight(userWeight);
+            userProfile.setHieght(userHeight);
+            userProfile.setAge(userAge);
 
-        preference.save("UserProfile", userProfile);
+            preference.save("UserProfile", userProfile);
+        } catch (Exception e) {
+            message.alert("ขออภัย ข้อมูลส่วนตัวไม่ถูกต้อง");
+        }
     }
 
     @Override

@@ -59,6 +59,9 @@ public class FoodDbAdapter {
                 query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
             } else if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
                 double bestCal = getBestCal();
+                if (bestCal == 0) {
+                    return new ArrayList<>();
+                }
                 query += " WHERE Food_Calories > " + String.valueOf(bestCal)
                         + " - 100 AND Food_Calories < " + String.valueOf(bestCal) + " + 100";
             }
@@ -70,6 +73,9 @@ public class FoodDbAdapter {
                 query += " AND Foods.Food_Favorite = 1";
             } else if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
                 double bestCal = getBestCal();
+                if (bestCal == 0) {
+                    return new ArrayList<>();
+                }
                 query += " AND Food_Calories > " + String.valueOf(bestCal)
                         + " - 100 AND Food_Calories < " + String.valueOf(bestCal) + " + 100";
             }
@@ -78,7 +84,6 @@ public class FoodDbAdapter {
 
         Cursor c1 = FoodDB.rawQuery(query);
         ArrayList<FoodsListItems> foodList = new ArrayList<>();
-
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
                 do {
@@ -97,6 +102,9 @@ public class FoodDbAdapter {
     private double getBestCal() {
         CommonSharePreference preference = new CommonSharePreference(context);
         UserProfile userProfile = (UserProfile) preference.read("UserProfile", UserProfile.class);
+        if (userProfile == null) {
+            return 0;
+        }
         double bmr = 0;
         double tdee = 0;
         switch (userProfile.getGender()) {

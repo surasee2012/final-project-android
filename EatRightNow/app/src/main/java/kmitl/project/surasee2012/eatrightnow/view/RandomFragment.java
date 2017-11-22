@@ -1,8 +1,12 @@
 package kmitl.project.surasee2012.eatrightnow.view;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
@@ -31,6 +35,8 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
     private TextView foodCalTv;
     private Spinner tagSpinner;
     private Spinner specialSpinner;
+    private Button findMoreBtn;
+    private Button recomResBtn;
 
     private SensorManager mSensorManager;
     private ShakeEventListener mSensorListener;
@@ -43,6 +49,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
     private String[] special_array;
     private String tagFilter;
     private String specialFilter;
+    private String randomedFood;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +66,11 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         foodCalTv.setText("");
 
         Button randomBtn = rootView.findViewById(R.id.randomBtn);
+        findMoreBtn = rootView.findViewById(R.id.findMoreBtn);
+        recomResBtn = rootView.findViewById(R.id.recomResBtn);
         randomBtn.setOnClickListener(this);
+        findMoreBtn.setOnClickListener(this);
+        recomResBtn.setOnClickListener(this);
 
         tag_array = getResources().getStringArray(R.array.tags_array);
         tagSpinner = rootView.findViewById(R.id.tagSpinner);
@@ -97,7 +108,13 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-        random();
+        switch (view.getId()) {
+            case R.id.randomBtn:
+                random();
+                break;
+            case R.id.findMoreBtn:
+                findMore(randomedFood);
+        }
     }
 
     @Override
@@ -115,7 +132,11 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         foodNameTv.setText("");
         foodCalTv.setText("");
         if (foodList.isEmpty()) {
-            message.alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+            if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
+                message.alert("ขออภัย คุณยังไม่ได้กรอกข้อมูลส่วนตัว หรือ ข้อมูลส่วนตัวไม่ถูกต้อง");
+            } else {
+                message.alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
+            }
             vibrator.vibrate(200);
         }
     }
@@ -140,10 +161,12 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getView()!=null){
+        if(getView()!= null){
             foodList = foodDbAdapter.getData(tagFilter, specialFilter);
             foodNameTv.setText("");
             foodCalTv.setText("");
+            findMoreBtn.setVisibility(View.GONE);
+            recomResBtn.setVisibility(View.GONE);
         }
     }
 
@@ -154,7 +177,25 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         } else {
             foodNameTv.setText(foodRandomItem.getFood_Name());
             foodCalTv.setText(Integer.toString(foodRandomItem.getFood_Calories()) + " แคล/จาน");
+            findMoreBtn.setVisibility(View.VISIBLE);
+            recomResBtn.setVisibility(View.VISIBLE);
+            randomedFood = foodRandomItem.getFood_Name();
         }
         vibrator.vibrate(200);
+    }
+
+    public void findMore(String foodName) {
+        String url = "https://www.google.co.th/search?q=" + foodName;
+        try {
+            Intent i = new Intent("android.intent.action.MAIN");
+            i.setComponent(ComponentName.unflattenFromString("com.android.chrome/com.android.chrome.Main"));
+            i.addCategory("android.intent.category.LAUNCHER");
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
+        catch(ActivityNotFoundException e) {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(i);
+        }
     }
 }
