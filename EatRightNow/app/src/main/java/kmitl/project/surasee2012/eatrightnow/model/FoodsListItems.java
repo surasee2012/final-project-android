@@ -1,14 +1,14 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Gun on 11/8/2017.
  */
 
-public class FoodsListItems {
+public class FoodsListItems extends FoodItem {
 
     private int Food_ID;
-    private String Food_Name;
-    private int Food_Calories;
     private int Food_Favorite;
 
     public int getFood_ID() {
@@ -17,22 +17,6 @@ public class FoodsListItems {
 
     public void setFood_ID(int food_ID) {
         Food_ID = food_ID;
-    }
-
-    public String getFood_Name() {
-        return Food_Name;
-    }
-
-    public void setFood_Name(String food_Name) {
-        Food_Name = food_Name;
-    }
-
-    public int getFood_Calories() {
-        return Food_Calories;
-    }
-
-    public void setFood_Calories(int food_Calories) {
-        Food_Calories = food_Calories;
     }
 
     public int getFood_Favorite() {

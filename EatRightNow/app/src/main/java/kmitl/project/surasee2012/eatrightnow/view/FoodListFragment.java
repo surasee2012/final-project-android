@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import kmitl.project.surasee2012.eatrightnow.AddEditActivity;
 import kmitl.project.surasee2012.eatrightnow.R;
@@ -20,6 +21,11 @@ import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
 
 public class FoodListFragment extends Fragment {
 
+    private FoodListAdapter foodListAdapter;
+    private RecyclerView recyclerView;
+
+    private FoodDbAdapter foodDbAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,10 +33,10 @@ public class FoodListFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        FoodDbAdapter foodDbAdapter = new FoodDbAdapter(getContext());
+        foodDbAdapter = new FoodDbAdapter(getContext());
 
-        FoodListAdapter foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
-        RecyclerView recyclerView = rootView.findViewById(R.id.foodList);
+        foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
+        recyclerView = rootView.findViewById(R.id.foodList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(foodListAdapter);
@@ -39,21 +45,32 @@ public class FoodListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        foodListAdapter.update(foodDbAdapter.getData());
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
         inflater.inflate(R.menu.add_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        String foodName = ((TextView) recyclerView.findViewHolderForAdapterPosition(item.getGroupId())
+                .itemView.findViewById(R.id.foodNameItem)).getText().toString();
+        int foodID = foodDbAdapter.getFoodID(foodName);
         switch (item.getItemId()){
             case 0:
                 Intent intent = new Intent(getContext(), AddEditActivity.class);
+                intent.putExtra("isEdit", true);
+                intent.putExtra("foodID", foodID);
                 startActivity(intent);
                 break;
             case 1:
-
+                foodDbAdapter.deleteFoodData(foodID);
+                foodListAdapter.removeAt(item.getGroupId());
                 break;
         }
         return super.onContextItemSelected(item);

@@ -92,7 +92,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 0);
                         foodList.get(position).setFood_Favorite(0);
                         Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
-                        message.setToast(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากโปรดเรียบร้อยแล้ว");
+                        message.setToast(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากของโปรดเรียบร้อยแล้ว");
                         break;
                 }
             }
@@ -109,5 +109,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
     @Override
     public int getItemCount() {
         return foodList.size();
+    }
+
+    public void update(ArrayList<FoodsListItems> foodList) {
+        this.foodList = foodList;
+        notifyDataSetChanged();
+    }
+
+    public void removeAt(int position) {
+        foodList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, foodList.size());
     }
 }

@@ -131,6 +131,8 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         foodList = foodDbAdapter.getData(tagFilter, specialFilter);
         foodNameTv.setText("");
         foodCalTv.setText("");
+        findMoreBtn.setVisibility(View.GONE);
+        recomResBtn.setVisibility(View.GONE);
         if (foodList.isEmpty()) {
             if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
                 message.alert("ขออภัย คุณยังไม่ได้กรอกข้อมูลส่วนตัว หรือ ข้อมูลส่วนตัวไม่ถูกต้อง");
@@ -174,6 +176,8 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         FoodRandomItem foodRandomItem = foodDbAdapter.getRandom(foodList);
         if (foodRandomItem.getErrorCollector() > 0) {
             message.alert(foodRandomItem.getErrorCollector());
+            findMoreBtn.setVisibility(View.GONE);
+            recomResBtn.setVisibility(View.GONE);
         } else {
             foodNameTv.setText(foodRandomItem.getFood_Name());
             foodCalTv.setText(Integer.toString(foodRandomItem.getFood_Calories()) + " แคล/จาน");

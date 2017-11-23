@@ -12,16 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="60dp"
         android:text="ชื่ออาหาร"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/foodNameEt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/foodNameEt"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,51 +32,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="จำนวนแคลอรี่"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
+        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/foodCalEt"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="แคลอรี่"
         android:textSize="18dp"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toEndOf="@+id/foodCalEt"
+        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="ของโปรด"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
+        app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/favSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="22dp"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
 
     <TextView
         android:id="@+id/textView14"
@@ -99,11 +98,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:text="ไข่"
-        app:layout_constraintStart_toStartOf="@+id/checkBox7"
+        app:layout_constraintStart_toStartOf="@+id/vegCb"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/chicDuckCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -114,96 +113,96 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/porkCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="หมู"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
+        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/beefCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:text="เนื้อ"
-        app:layout_constraintStart_toStartOf="@+id/checkBox7"
+        app:layout_constraintStart_toStartOf="@+id/vegCb"
         app:layout_constraintTop_toBottomOf="@+id/eggCb" />
 
     <CheckBox
-        android:id="@+id/checkBox5"
+        android:id="@+id/fishCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="ปลา"
-        app:layout_constraintStart_toEndOf="@+id/checkBox7"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintStart_toEndOf="@+id/vegCb"
+        app:layout_constraintTop_toBottomOf="@+id/chicDuckCb" />
 
     <CheckBox
-        android:id="@+id/checkBox6"
+        android:id="@+id/seafoodCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="อาหารทะเลอื่น ๆ"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
+        app:layout_constraintTop_toBottomOf="@+id/porkCb" />
 
     <CheckBox
-        android:id="@+id/checkBox7"
+        android:id="@+id/vegCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="ผัก, ผลไม้"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        app:layout_constraintEnd_toStartOf="@+id/chicDuckCb"
+        app:layout_constraintTop_toBottomOf="@+id/beefCb" />
 
     <CheckBox
-        android:id="@+id/checkBox8"
+        android:id="@+id/riceCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="ข้าว"
-        app:layout_constraintStart_toEndOf="@+id/checkBox7"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
+        app:layout_constraintStart_toEndOf="@+id/vegCb"
+        app:layout_constraintTop_toBottomOf="@+id/fishCb" />
 
     <CheckBox
-        android:id="@+id/checkBox9"
+        android:id="@+id/noodleCb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="เส้นก๋วยเตี๋ยว"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
+        app:layout_constraintTop_toBottomOf="@+id/seafoodCb" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/cancelBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="ยกเลิก"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/addEditBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+        app:layout_constraintTop_toBottomOf="@+id/riceCb" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addEditBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="เพิ่ม"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+        app:layout_constraintStart_toEndOf="@+id/cancelBtn"
+        app:layout_constraintTop_toBottomOf="@+id/riceCb" />
 
 
 </android.support.constraint.ConstraintLayout>

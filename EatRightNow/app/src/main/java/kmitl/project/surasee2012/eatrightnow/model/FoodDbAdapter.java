@@ -177,14 +177,93 @@ public class FoodDbAdapter {
         return foodRandom;
     }
 
+    public int getFoodID (String foodName) {
+        String query = "SELECT Food_ID FROM Foods WHERE Food_Name = '" + foodName + "';";
+        Cursor c1 = FoodDB.rawQuery(query);
+        int foodID = 0;
+
+        if (c1 != null && c1.getCount() != 0) {
+            if (c1.moveToFirst()) {
+                foodID = c1.getInt(c1.getColumnIndex("Food_ID"));
+            }
+        }
+        c1.close();
+
+        return foodID;
+    }
+
+    public FoodItemWithTags getFoodItemWithTags (int foodID) {
+        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods" +
+                " WHERE Food_ID = " + foodID +";";
+        Cursor c1 = FoodDB.rawQuery(query);
+        FoodItemWithTags foodItemWithTags = new FoodItemWithTags();
+
+        if (c1 != null && c1.getCount() != 0) {
+            if (c1.moveToFirst()) {
+                foodItemWithTags.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                foodItemWithTags.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                foodItemWithTags.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
+            }
+        }
+        c1.close();
+
+        query = "SELECT Tag_ID FROM Foods_Tags WHERE Food_ID = " + foodID + ";";
+        c1 = FoodDB.rawQuery(query);
+        ArrayList<Integer> tags = new ArrayList<>();
+
+        if (c1 != null && c1.getCount() != 0) {
+            int i = 0;
+            if (c1.moveToFirst()) {
+                do {
+                    tags.add(c1.getInt(c1.getColumnIndex("Tag_ID")));
+                } while (c1.moveToNext());
+            }
+        }
+        c1.close();
+        foodItemWithTags.setTags(tags);
+
+        return foodItemWithTags;
+    }
+
+    public void addFood(String foodName, Integer foodCal, Integer foodFav) {
+        String InsertIntoQuery = "INSERT INTO Foods (Food_Name, Food_Calories, Food_Favorite)" +
+                " VALUES ('" + foodName + "', " + String.valueOf(foodCal) + ", " + String.valueOf(foodFav) + ");";
+        FoodDB.execute(InsertIntoQuery);
+    }
+
+    public void addTag (int foodID, int tagID) {
+        String InsertIntoQuery = "INSERT INTO Foods_Tags (Food_ID, Tag_ID)" +
+                " VALUES (" + String.valueOf(foodID) + ", " + String.valueOf(tagID) + ");";
+        FoodDB.execute(InsertIntoQuery);
+    }
+
+    public void updateFood(String foodName, Integer foodCal, Integer foodFav) {
+        String UpdateQuery = "UPDATE Foods" +
+                " SET Food_Calories = " + String.valueOf(foodCal) + ", Food_Favorite = " + String.valueOf(foodFav) +
+                " WHERE Food_Name = '" + foodName + "';";
+        FoodDB.execute(UpdateQuery);
+    }
+
+    public void setFavorite(int foodID, int favoriteValue) {
+        String UpdateQuery = "UPDATE Foods SET Food_Favorite = " + Integer.toString(favoriteValue) +
+                " WHERE Food_ID = " + Integer.toString(foodID) + ";";
+        FoodDB.execute(UpdateQuery);
+    }
+
     public void setPreviousRandomIndex(int previousRandomIndex) {
         this.previousRandomIndex = previousRandomIndex;
     }
 
-    public void setFavorite(int foodID, int favoriteValue) {
-        String UpdateQuery = "UPDATE Foods SET Food_Favorite = " + Integer.toString(favoriteValue)
-                + " WHERE Food_ID = " + Integer.toString(foodID) + ";";
-        FoodDB.execute(UpdateQuery);
+    public void deleteFoodData(int foodID) {
+        String DeleteQuery = "DELETE FROM Foods_Tags WHERE Food_ID = " + foodID + ";";
+        FoodDB.execute(DeleteQuery);
+        DeleteQuery = "DELETE FROM Foods WHERE Food_ID = " + foodID + ";";
+        FoodDB.execute(DeleteQuery);
+    }
+
+    public void deleteTags(int foodID) {
+        String DeleteQuery = "DELETE FROM Foods_Tags WHERE Food_ID = " + foodID + ";";
+        FoodDB.execute(DeleteQuery);
     }
 
     static class FoodDB extends SQLiteOpenHelper {

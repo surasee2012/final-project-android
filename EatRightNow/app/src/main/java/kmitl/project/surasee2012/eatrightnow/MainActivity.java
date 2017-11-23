@@ -1,5 +1,6 @@
 package kmitl.project.surasee2012.eatrightnow;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                return true;
+                Intent intent = new Intent(this, AddEditActivity.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
