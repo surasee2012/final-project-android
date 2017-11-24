@@ -30,20 +30,20 @@ public class FoodDbAdapter {
         this.context = context;
     }
 
-    public ArrayList<FoodsListItems> getData() {
+    public ArrayList<FoodListItems> getData() {
         String query = "SELECT * FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
-        ArrayList<FoodsListItems> foodList = new ArrayList<>();
+        ArrayList<FoodListItems> foodList = new ArrayList<>();
 
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
                 do {
-                    FoodsListItems foodsListItems = new FoodsListItems();
-                    foodsListItems.setFood_ID(c1.getInt(c1.getColumnIndex("Food_ID")));
-                    foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
-                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                    foodsListItems.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
-                    foodList.add(foodsListItems);
+                    FoodListItems foodListItems = new FoodListItems();
+                    foodListItems.setFood_ID(c1.getInt(c1.getColumnIndex("Food_ID")));
+                    foodListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                    foodListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodListItems.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
+                    foodList.add(foodListItems);
                 } while (c1.moveToNext());
             }
         }
@@ -52,8 +52,8 @@ public class FoodDbAdapter {
         return foodList;
     }
 
-    public ArrayList<FoodsListItems> getData(String tagFilter, String specialFilter) {
-        String query = "SELECT Food_Name, Food_Calories FROM Foods";
+    public ArrayList<FoodRandomItem> getData(String tagFilter, String specialFilter) {
+        String query = "SELECT Food_Name, Food_Calories, Food_Restaurant FROM Foods";
         if (tagFilter.equals("ทั้งหมด")) {
             if (specialFilter.equals("ของโปรด")) {
                 query += " WHERE Food_Favorite = 1 GROUP BY Food_Name";
@@ -83,14 +83,15 @@ public class FoodDbAdapter {
         query += ";";
 
         Cursor c1 = FoodDB.rawQuery(query);
-        ArrayList<FoodsListItems> foodList = new ArrayList<>();
+        ArrayList<FoodRandomItem> foodList = new ArrayList<>();
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
                 do {
-                    FoodsListItems foodsListItems = new FoodsListItems();
-                    foodsListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
-                    foodsListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                    foodList.add(foodsListItems);
+                    FoodRandomItem foodRandomItem = new FoodRandomItem();
+                    foodRandomItem.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                    foodRandomItem.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodRandomItem.setFood_Restaurant(c1.getString(c1.getColumnIndex("Food_Restaurant")));
+                    foodList.add(foodRandomItem);
                 } while (c1.moveToNext());
             }
         }
@@ -154,7 +155,7 @@ public class FoodDbAdapter {
         return (tdee * 0.8) / 3;
     }
 
-    public FoodRandomItem getRandom(ArrayList<FoodsListItems> foodList) {
+    public FoodRandomItem getRandom(ArrayList<FoodRandomItem> foodList) {
         FoodRandomItem foodRandom = new FoodRandomItem();
         try {
             Random random = new Random();
@@ -167,8 +168,10 @@ public class FoodDbAdapter {
                 return foodRandom;
             }
             previousRandomIndex = randomIndex;
+            foodRandom = new FoodRandomItem();
             foodRandom.setFood_Name(foodList.get(randomIndex).getFood_Name());
             foodRandom.setFood_Calories(foodList.get(randomIndex).getFood_Calories());
+            foodRandom.setFood_Restaurant(foodList.get(randomIndex).getFood_Restaurant());
         } catch (Exception e) {
             foodRandom.setErrorCollector(2);
             return foodRandom;
@@ -192,17 +195,18 @@ public class FoodDbAdapter {
         return foodID;
     }
 
-    public FoodItemWithTags getFoodItemWithTags (int foodID) {
-        String query = "SELECT Food_Name, Food_Calories, Food_Favorite FROM Foods" +
+    public FoodItemWithTagsAndRes getFoodItemWithTags (int foodID) {
+        String query = "SELECT Food_Name, Food_Calories, Food_Favorite, Food_Restaurant FROM Foods" +
                 " WHERE Food_ID = " + foodID +";";
         Cursor c1 = FoodDB.rawQuery(query);
-        FoodItemWithTags foodItemWithTags = new FoodItemWithTags();
+        FoodItemWithTagsAndRes foodItemWithTagsAndRes = new FoodItemWithTagsAndRes();
 
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
-                foodItemWithTags.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
-                foodItemWithTags.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                foodItemWithTags.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
+                foodItemWithTagsAndRes.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                foodItemWithTagsAndRes.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                foodItemWithTagsAndRes.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
+                foodItemWithTagsAndRes.setFood_Restaurant(c1.getString(c1.getColumnIndex("Food_Restaurant")));
             }
         }
         c1.close();
@@ -220,14 +224,20 @@ public class FoodDbAdapter {
             }
         }
         c1.close();
-        foodItemWithTags.setTags(tags);
+        foodItemWithTagsAndRes.setTags(tags);
 
-        return foodItemWithTags;
+        return foodItemWithTagsAndRes;
     }
 
     public void addFood(String foodName, Integer foodCal, Integer foodFav) {
         String InsertIntoQuery = "INSERT INTO Foods (Food_Name, Food_Calories, Food_Favorite)" +
                 " VALUES ('" + foodName + "', " + String.valueOf(foodCal) + ", " + String.valueOf(foodFav) + ");";
+        FoodDB.execute(InsertIntoQuery);
+    }
+
+    public void addFood(String foodName, Integer foodCal, Integer foodFav, String foodRes) {
+        String InsertIntoQuery = "INSERT INTO Foods (Food_Name, Food_Calories, Food_Favorite, Food_Restaurant)" +
+                " VALUES ('" + foodName + "', " + String.valueOf(foodCal) + ", " + String.valueOf(foodFav) + ", '" + foodRes + "');";
         FoodDB.execute(InsertIntoQuery);
     }
 
@@ -240,6 +250,15 @@ public class FoodDbAdapter {
     public void updateFood(String foodName, Integer foodCal, Integer foodFav) {
         String UpdateQuery = "UPDATE Foods" +
                 " SET Food_Calories = " + String.valueOf(foodCal) + ", Food_Favorite = " + String.valueOf(foodFav) +
+                ", Food_Restaurant = null" +
+                " WHERE Food_Name = '" + foodName + "';";
+        FoodDB.execute(UpdateQuery);
+    }
+
+    public void updateFood(String foodName, Integer foodCal, Integer foodFav, String foodRes) {
+        String UpdateQuery = "UPDATE Foods" +
+                " SET Food_Calories = " + String.valueOf(foodCal) + ", Food_Favorite = " + String.valueOf(foodFav) +
+                ", Food_Restaurant = '" + foodRes + "'" +
                 " WHERE Food_Name = '" + foodName + "';";
         FoodDB.execute(UpdateQuery);
     }

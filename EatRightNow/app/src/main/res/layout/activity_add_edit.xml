@@ -6,203 +6,261 @@
     android:layout_height="match_parent"
     tools:context="kmitl.project.surasee2012.eatrightnow.AddEditActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="324dp"
+        tools:layout_editor_absoluteY="189dp">
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="60dp"
-        android:text="ชื่ออาหาร"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/foodNameEt"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/foodNameEt"
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="20dp"
+                android:text="ชื่ออาหาร"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toStartOf="@+id/foodNameEt"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        android:text="จำนวนแคลอรี่"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
-        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
+            <EditText
+                android:id="@+id/foodNameEt"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/foodCalEt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="24dp"
+                android:text="จำนวนแคลอรี่"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
+                app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="แคลอรี่"
-        android:textSize="18dp"
-        app:layout_constraintStart_toEndOf="@+id/foodCalEt"
-        app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
+            <EditText
+                android:id="@+id/foodCalEt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="24dp"
-        android:text="ของโปรด"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
-        app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="แคลอรี่"
+                android:textSize="18dp"
+                app:layout_constraintStart_toEndOf="@+id/foodCalEt"
+                app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
-    <Switch
-        android:id="@+id/favSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="22dp"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="24dp"
+                android:text="ของโปรด"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
+                app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="แท็ก"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            <Switch
+                android:id="@+id/favSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="22dp"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
 
-    <CheckBox
-        android:id="@+id/eggCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        android:text="ไข่"
-        app:layout_constraintStart_toStartOf="@+id/vegCb"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="แท็ก"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <CheckBox
-        android:id="@+id/chicDuckCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="ไก่, เป็ด"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            <CheckBox
+                android:id="@+id/eggCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:text="ไข่"
+                app:layout_constraintStart_toStartOf="@+id/vegCb"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <CheckBox
-        android:id="@+id/porkCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="หมู"
-        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            <CheckBox
+                android:id="@+id/chicDuckCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="ไก่, เป็ด"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <CheckBox
-        android:id="@+id/beefCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        android:text="เนื้อ"
-        app:layout_constraintStart_toStartOf="@+id/vegCb"
-        app:layout_constraintTop_toBottomOf="@+id/eggCb" />
+            <CheckBox
+                android:id="@+id/porkCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="หมู"
+                app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <CheckBox
-        android:id="@+id/fishCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ปลา"
-        app:layout_constraintStart_toEndOf="@+id/vegCb"
-        app:layout_constraintTop_toBottomOf="@+id/chicDuckCb" />
+            <CheckBox
+                android:id="@+id/beefCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:text="เนื้อ"
+                app:layout_constraintStart_toStartOf="@+id/vegCb"
+                app:layout_constraintTop_toBottomOf="@+id/eggCb" />
 
-    <CheckBox
-        android:id="@+id/seafoodCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="อาหารทะเลอื่น ๆ"
-        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
-        app:layout_constraintTop_toBottomOf="@+id/porkCb" />
+            <CheckBox
+                android:id="@+id/fishCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="ปลา"
+                app:layout_constraintStart_toEndOf="@+id/vegCb"
+                app:layout_constraintTop_toBottomOf="@+id/chicDuckCb" />
 
-    <CheckBox
-        android:id="@+id/vegCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ผัก, ผลไม้"
-        app:layout_constraintEnd_toStartOf="@+id/chicDuckCb"
-        app:layout_constraintTop_toBottomOf="@+id/beefCb" />
+            <CheckBox
+                android:id="@+id/seafoodCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="อาหารทะเลอื่น ๆ"
+                app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
+                app:layout_constraintTop_toBottomOf="@+id/porkCb" />
 
-    <CheckBox
-        android:id="@+id/riceCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ข้าว"
-        app:layout_constraintStart_toEndOf="@+id/vegCb"
-        app:layout_constraintTop_toBottomOf="@+id/fishCb" />
+            <CheckBox
+                android:id="@+id/vegCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="ผัก, ผลไม้"
+                app:layout_constraintEnd_toStartOf="@+id/chicDuckCb"
+                app:layout_constraintTop_toBottomOf="@+id/beefCb" />
 
-    <CheckBox
-        android:id="@+id/noodleCb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="เส้นก๋วยเตี๋ยว"
-        app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
-        app:layout_constraintTop_toBottomOf="@+id/seafoodCb" />
+            <CheckBox
+                android:id="@+id/riceCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="ข้าว"
+                app:layout_constraintStart_toEndOf="@+id/vegCb"
+                app:layout_constraintTop_toBottomOf="@+id/fishCb" />
 
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="ยกเลิก"
-        app:layout_constraintEnd_toStartOf="@+id/addEditBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/riceCb" />
+            <CheckBox
+                android:id="@+id/noodleCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="เส้นก๋วยเตี๋ยว"
+                app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
+                app:layout_constraintTop_toBottomOf="@+id/seafoodCb" />
 
-    <Button
-        android:id="@+id/addEditBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="เพิ่ม"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancelBtn"
-        app:layout_constraintTop_toBottomOf="@+id/riceCb" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ร้านโปรด"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/riceCb" />
 
+            <Button
+                android:id="@+id/clearFavResBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="ลบร้านโปรด"
+                app:layout_constraintEnd_toStartOf="@+id/pickFavResBtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <Button
+                android:id="@+id/pickFavResBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="เลือกร้านโปรด"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/clearFavResBtn"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/foodResTv"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickFavResBtn" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="ยกเลิก"
+                app:layout_constraintEnd_toStartOf="@+id/addEditBtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodResTv" />
+
+            <Button
+                android:id="@+id/addEditBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="เพิ่ม"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cancelBtn"
+                app:layout_constraintTop_toBottomOf="@+id/foodResTv" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

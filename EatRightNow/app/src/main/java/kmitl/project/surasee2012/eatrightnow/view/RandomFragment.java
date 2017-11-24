@@ -18,13 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
 import kmitl.project.surasee2012.eatrightnow.model.FoodRandomItem;
-import kmitl.project.surasee2012.eatrightnow.model.FoodsListItems;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.ShakeEventListener;
 
@@ -44,12 +44,13 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
     private FoodDbAdapter foodDbAdapter;
     private Message message;
     private Vibrator vibrator;
-    private ArrayList<FoodsListItems> foodList;
+    private ArrayList<FoodRandomItem> foodList;
     private String[] tag_array;
     private String[] special_array;
     private String tagFilter;
     private String specialFilter;
-    private String randomedFood;
+    private String randomFood;
+    private String foodRes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,7 +114,11 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
                 random();
                 break;
             case R.id.findMoreBtn:
-                findMore(randomedFood);
+                findMore(randomFood);
+                break;
+            case R.id.recomResBtn:
+                getFoodResMap(foodRes);
+                break;
         }
     }
 
@@ -172,22 +177,6 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    public void random() {
-        FoodRandomItem foodRandomItem = foodDbAdapter.getRandom(foodList);
-        if (foodRandomItem.getErrorCollector() > 0) {
-            message.alert(foodRandomItem.getErrorCollector());
-            findMoreBtn.setVisibility(View.GONE);
-            recomResBtn.setVisibility(View.GONE);
-        } else {
-            foodNameTv.setText(foodRandomItem.getFood_Name());
-            foodCalTv.setText(Integer.toString(foodRandomItem.getFood_Calories()) + " แคล/จาน");
-            findMoreBtn.setVisibility(View.VISIBLE);
-            recomResBtn.setVisibility(View.VISIBLE);
-            randomedFood = foodRandomItem.getFood_Name();
-        }
-        vibrator.vibrate(200);
-    }
-
     public void findMore(String foodName) {
         String url = "https://www.google.co.th/search?q=" + foodName;
         try {
@@ -200,6 +189,37 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         catch(ActivityNotFoundException e) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(i);
+        }
+    }
+
+    public void random() {
+        FoodRandomItem foodRandomItem = foodDbAdapter.getRandom(foodList);
+        if (foodRandomItem.getErrorCollector() > 0) {
+            message.alert(foodRandomItem.getErrorCollector());
+            findMoreBtn.setVisibility(View.GONE);
+            recomResBtn.setVisibility(View.GONE);
+        } else {
+            foodNameTv.setText(foodRandomItem.getFood_Name());
+            foodCalTv.setText(Integer.toString(foodRandomItem.getFood_Calories()) + " แคล/จาน");
+            findMoreBtn.setVisibility(View.VISIBLE);
+            recomResBtn.setVisibility(View.VISIBLE);
+            randomFood = foodRandomItem.getFood_Name();
+            foodRes = foodRandomItem.getFood_Restaurant();
+        }
+        vibrator.vibrate(200);
+    }
+
+    public void getFoodResMap(String foodRes) {
+        if (foodRes != null) {
+            String foodResParameter = "";
+            for (char c: foodRes.toCharArray()) {
+                if (c == ' ') {
+                    foodResParameter += '+';
+                }
+            }
+            String url = "https://www.google.com/maps/search/?api=1&query=" + foodResParameter;
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
         }
     }
 }

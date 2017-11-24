@@ -6,7 +6,16 @@ package kmitl.project.surasee2012.eatrightnow.model;
 
 public class FoodRandomItem extends FoodItem {
 
+    private String Food_Restaurant;
     private int errorCollector;
+
+    public String getFood_Restaurant() {
+        return Food_Restaurant;
+    }
+
+    public void setFood_Restaurant(String food_Restaurant) {
+        Food_Restaurant = food_Restaurant;
+    }
 
     public int getErrorCollector() {
         return errorCollector;

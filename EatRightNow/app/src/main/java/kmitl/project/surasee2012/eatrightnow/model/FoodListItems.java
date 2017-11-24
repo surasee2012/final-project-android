@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Gun on 11/8/2017.
  */
 
-public class FoodsListItems extends FoodItem {
+public class FoodListItems extends FoodItem {
 
     private int Food_ID;
     private int Food_Favorite;

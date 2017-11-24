@@ -6,10 +6,11 @@ import java.util.ArrayList;
  * Created by Gun on 11/24/2017.
  */
 
-public class FoodItemWithTags extends FoodItem {
+public class FoodItemWithTagsAndRes extends FoodItem {
 
     private int Food_Favorite;
     private ArrayList<Integer> tags;
+    private String Food_Restaurant;
 
     public int getFood_Favorite() {
         return Food_Favorite;
@@ -27,11 +28,11 @@ public class FoodItemWithTags extends FoodItem {
         this.tags = tags;
     }
 
-    @Override
-    public String toString() {
-        return "FoodItemWithTags{" +
-                "Food_Favorite=" + Food_Favorite +
-                ", tags=" + tags +
-                '}';
+    public String getFood_Restaurant() {
+        return Food_Restaurant;
+    }
+
+    public void setFood_Restaurant(String food_Restaurant) {
+        Food_Restaurant = food_Restaurant;
     }
 }
