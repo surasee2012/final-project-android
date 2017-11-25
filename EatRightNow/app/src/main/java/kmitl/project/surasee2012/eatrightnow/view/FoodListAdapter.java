@@ -14,13 +14,9 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import kmitl.project.surasee2012.eatrightnow.R;
-import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
+import kmitl.project.surasee2012.eatrightnow.sqliteDB.FoodDbAdapter;
 import kmitl.project.surasee2012.eatrightnow.model.FoodListItems;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
-
-/**
- * Created by Gun on 11/11/2017.
- */
 
 class FoodHolder extends RecyclerView.ViewHolder {
 

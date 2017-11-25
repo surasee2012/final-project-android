@@ -5,10 +5,6 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-/**
- * Created by Gun on 11/5/2017.
- */
-
 public class Message {
 
     private Toast toast;

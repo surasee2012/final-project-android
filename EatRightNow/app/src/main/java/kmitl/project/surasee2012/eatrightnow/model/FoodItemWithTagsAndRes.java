@@ -2,10 +2,6 @@ package kmitl.project.surasee2012.eatrightnow.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Gun on 11/24/2017.
- */
-
 public class FoodItemWithTagsAndRes extends FoodItem {
 
     private int Food_Favorite;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="kmitl.project.surasee2012.eatrightnow.MainActivity">
+    tools:context="kmitl.project.surasee2012.eatrightnow.activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -36,7 +36,7 @@
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/random_food" />
+                android:text="@string/สุ่มอาหาร" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"

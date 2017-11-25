@@ -1,13 +1,9 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
-/**
- * Created by Gun on 11/21/2017.
- */
-
 public class UserProfile {
 
     private Double weight;
-    private Double hieght;
+    private Double height;
     private Integer age;
     private String gender;
     private String userActivity;
@@ -20,12 +16,12 @@ public class UserProfile {
         this.weight = weight;
     }
 
-    public Double getHieght() {
-        return hieght;
+    public Double getHeight() {
+        return height;
     }
 
-    public void setHieght(Double hieght) {
-        this.hieght = hieght;
+    public void setHeight(Double height) {
+        this.height = height;
     }
 
     public Integer getAge() {

@@ -1,11 +1,33 @@
 <resources>
     <string name="app_name">EatRightNow?</string>
-    <string name="random_food">สุ่มอาหาร</string>
+    <string name="สุ่มอาหาร">สุ่มอาหาร</string>
     <string name="food_list">ดูรายการอาหาร</string>
     <string name="profile">ข้อมูลส่วนตัว</string>
     <string name="random">สุ่ม</string>
     <string name="find_more">ค้นหาเพิ่มเติม</string>
     <string name="recommend_restaurant">แนะนำร้าน</string>
+    <string name="food_name">ชื่ออาหาร</string>
+    <string name="food_calories">จำนวนแคลอรี่</string>
+    <string name="calories">แคลอรี่</string>
+    <string name="favorite_food">ของโปรด</string>
+    <string name="tag">แท็ก</string>
+    <string name="favorite_restaurant">ร้านโปรด</string>
+    <string name="delete_favorite_restaurant">ลบร้านโปรด</string>
+    <string name="choose_favorite_restaurant">เลือกร้านโปรด</string>
+    <string name="cancle">ยกเลิก</string>
+    <string name="add">เพิ่ม</string>
+    <string name="weight">น้ำหนัก</string>
+    <string name="kilogram">กิโลกรัม</string>
+    <string name="height">ส่วนสูง</string>
+    <string name="centimeter">เซนติเมตร</string>
+    <string name="age">อายุ</string>
+    <string name="years_old">ปี</string>
+    <string name="gender">เพศ</string>
+    <string name="daily_activity">กิจกรรมในหนึ่งวัน</string>
+    <string name="save">บันทึก</string>
+    <string name="clear">ล้างข้อมูล</string>
+    <string name="other_filter">ตัวเลือกเพิ่มเติม</string>
+    <string name="material_filter">วัตถุดิบ</string>
     <string-array name="tags_array">
         <item>ทั้งหมด</item>
         <item>ไข่</item>

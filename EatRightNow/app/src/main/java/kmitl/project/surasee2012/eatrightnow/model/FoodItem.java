@@ -1,9 +1,5 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
-/**
- * Created by Gun on 11/24/2017.
- */
-
 public class FoodItem {
 
     private String Food_Name;

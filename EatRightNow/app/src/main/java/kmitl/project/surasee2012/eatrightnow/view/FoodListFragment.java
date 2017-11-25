@@ -1,6 +1,5 @@
 package kmitl.project.surasee2012.eatrightnow.view;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,10 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import kmitl.project.surasee2012.eatrightnow.AddEditActivity;
+import kmitl.project.surasee2012.eatrightnow.activity.AddEditActivity;
 import kmitl.project.surasee2012.eatrightnow.R;
-import kmitl.project.surasee2012.eatrightnow.model.FoodDbAdapter;
-
+import kmitl.project.surasee2012.eatrightnow.sqliteDB.FoodDbAdapter;
 
 public class FoodListFragment extends Fragment {
 
@@ -34,12 +32,9 @@ public class FoodListFragment extends Fragment {
         setHasOptionsMenu(true);
 
         foodDbAdapter = new FoodDbAdapter(getContext());
-
         foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
-        recyclerView = rootView.findViewById(R.id.foodList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(foodListAdapter);
+
+        initView(rootView);
 
         return rootView;
     }
@@ -63,16 +58,31 @@ public class FoodListFragment extends Fragment {
         int foodID = foodDbAdapter.getFoodID(foodName);
         switch (item.getItemId()){
             case 0:
-                Intent intent = new Intent(getContext(), AddEditActivity.class);
-                intent.putExtra("isEdit", true);
-                intent.putExtra("foodID", foodID);
-                startActivity(intent);
+                startAddEditActivity(foodID);
                 break;
             case 1:
-                foodDbAdapter.deleteFoodData(foodID);
-                foodListAdapter.removeAt(item.getGroupId());
+                deleteFoodItem(item.getGroupId(), foodID);
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    public void initView(View rootView) {
+        recyclerView = rootView.findViewById(R.id.foodList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(foodListAdapter);
+    }
+
+    public void startAddEditActivity(int foodID) {
+        Intent intent = new Intent(getContext(), AddEditActivity.class);
+        intent.putExtra("isEdit", true);
+        intent.putExtra("foodID", foodID);
+        startActivity(intent);
+    }
+
+    public void deleteFoodItem(int position, int foodID) {
+        foodDbAdapter.deleteFoodData(foodID);
+        foodListAdapter.removeAt(position);
     }
 }

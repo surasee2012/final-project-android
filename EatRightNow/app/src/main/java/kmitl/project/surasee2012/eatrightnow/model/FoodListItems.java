@@ -1,11 +1,5 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
-import java.util.ArrayList;
-
-/**
- * Created by Gun on 11/8/2017.
- */
-
 public class FoodListItems extends FoodItem {
 
     private int Food_ID;

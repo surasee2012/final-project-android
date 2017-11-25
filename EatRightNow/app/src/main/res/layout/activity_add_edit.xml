@@ -4,25 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.surasee2012.eatrightnow.AddEditActivity">
+    tools:context="kmitl.project.surasee2012.eatrightnow.activity.AddEditActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="324dp"
-        tools:layout_editor_absoluteY="189dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="20dp"
-                android:text="ชื่ออาหาร"
+                android:text="@string/food_name"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toStartOf="@+id/foodNameEt"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -31,18 +33,18 @@
                 android:id="@+id/foodNameEt"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="24dp"
-                android:text="จำนวนแคลอรี่"
+                android:text="@string/food_calories"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
                 app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
@@ -58,23 +60,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="24dp"
-                android:text="แคลอรี่"
+                android:text="@string/calories"
                 android:textSize="18dp"
                 app:layout_constraintStart_toEndOf="@+id/foodCalEt"
                 app:layout_constraintTop_toBottomOf="@+id/foodNameEt" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="24dp"
-                android:text="ของโปรด"
+                android:text="@string/favorite_food"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toStartOf="@+id/foodCalEt"
                 app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
@@ -83,32 +85,32 @@
                 android:id="@+id/favSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="22dp"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/foodCalEt" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="แท็ก"
+                android:layout_marginTop="30dp"
+                android:text="@string/tag"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <CheckBox
                 android:id="@+id/eggCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginTop="8dp"
                 android:text="ไข่"
                 app:layout_constraintStart_toStartOf="@+id/vegCb"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <CheckBox
                 android:id="@+id/chicDuckCb"
@@ -119,23 +121,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <CheckBox
                 android:id="@+id/porkCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="หมู"
                 app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <CheckBox
                 android:id="@+id/beefCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginTop="8dp"
                 android:text="เนื้อ"
                 app:layout_constraintStart_toStartOf="@+id/vegCb"
@@ -145,7 +147,7 @@
                 android:id="@+id/fishCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="ปลา"
                 app:layout_constraintStart_toEndOf="@+id/vegCb"
@@ -155,7 +157,7 @@
                 android:id="@+id/seafoodCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="อาหารทะเลอื่น ๆ"
                 app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
@@ -165,7 +167,7 @@
                 android:id="@+id/vegCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:text="ผัก, ผลไม้"
                 app:layout_constraintEnd_toStartOf="@+id/chicDuckCb"
@@ -175,7 +177,7 @@
                 android:id="@+id/riceCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="ข้าว"
                 app:layout_constraintStart_toEndOf="@+id/vegCb"
@@ -185,18 +187,18 @@
                 android:id="@+id/noodleCb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text="เส้นก๋วยเตี๋ยว"
                 app:layout_constraintStart_toEndOf="@+id/chicDuckCb"
                 app:layout_constraintTop_toBottomOf="@+id/seafoodCb" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="ร้านโปรด"
+                android:text="@string/favorite_restaurant"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -208,22 +210,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="ลบร้านโปรด"
+                android:text="@string/delete_favorite_restaurant"
                 app:layout_constraintEnd_toStartOf="@+id/pickFavResBtn"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <Button
                 android:id="@+id/pickFavResBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="เลือกร้านโปรด"
+                android:text="@string/choose_favorite_restaurant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/clearFavResBtn"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
                 android:id="@+id/foodResTv"
@@ -242,7 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:text="ยกเลิก"
+                android:text="@string/cancle"
                 app:layout_constraintEnd_toStartOf="@+id/addEditBtn"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +255,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:text="เพิ่ม"
+                android:text="@string/add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/cancelBtn"

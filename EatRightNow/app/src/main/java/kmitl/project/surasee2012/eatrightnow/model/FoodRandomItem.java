@@ -1,9 +1,5 @@
 package kmitl.project.surasee2012.eatrightnow.model;
 
-/**
- * Created by Gun on 11/17/2017.
- */
-
 public class FoodRandomItem extends FoodItem {
 
     private String Food_Restaurant;
