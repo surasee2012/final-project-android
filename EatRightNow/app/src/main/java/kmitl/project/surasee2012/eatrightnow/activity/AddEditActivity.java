@@ -1,9 +1,14 @@
 package kmitl.project.surasee2012.eatrightnow.activity;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,7 +31,6 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
     private TextView foodResTv;
     private Switch favSwitch;
     private CheckBox[] tagCBs;
-    private Button addEditBtn;
 
     private FoodDbAdapter foodDbAdapter;
     private Message message;
@@ -66,18 +70,32 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
             case  R.id.pickFavResBtn:
                 startPlacePicker();
                 break;
-            case R.id.cancelBtn:
-                finish();
-                break;
-            case R.id.addEditBtn:
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.save_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_save:
                 try {
                     saveFoodData();
                 } catch (Exception e) {
                     message.alert("ขออภัย ข้อมูลไม่ถูกต้อง");
                 }
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
-
 
     private void startPlacePicker() {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -121,14 +139,12 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
     public void initView() {
         getSupportActionBar().setTitle("เพิ่มอาหาร");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Button clearFavResBtn = findViewById(R.id.clearFavResBtn);
         Button pickFavResBtn = findViewById(R.id.pickFavResBtn);
-        Button cancelBtn = findViewById(R.id.cancelBtn);
-        addEditBtn = findViewById(R.id.addEditBtn);
         clearFavResBtn.setOnClickListener(this);
         pickFavResBtn.setOnClickListener(this);
-        cancelBtn.setOnClickListener(this);
-        addEditBtn.setOnClickListener(this);
 
         foodNameEt = findViewById(R.id.foodNameEt);
         foodCalEt = findViewById(R.id.foodCalEt);
@@ -165,7 +181,6 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
             foodResTv.setText(foodItemWithTagsAndRes.getFood_Restaurant());
             foodResTv.setVisibility(View.VISIBLE);
         }
-        addEditBtn.setText("บันทึก");
     }
 
     public void saveFoodData() {

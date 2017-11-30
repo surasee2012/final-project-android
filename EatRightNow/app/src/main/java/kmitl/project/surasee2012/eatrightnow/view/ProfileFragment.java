@@ -1,8 +1,12 @@
 package kmitl.project.surasee2012.eatrightnow.view;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -51,17 +55,41 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.save_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                try {
+                    saveUserProfile();
+                } catch (Exception e) {
+                    message.alert("ขออภัย ข้อมูลส่วนตัวไม่ถูกต้อง");
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clearBtn:
                 clearUserProfile();
                 break;
             case R.id.saveBtn:
-                try {
-                    saveUserProfile();
-                } catch (Exception e) {
-                    message.alert("ขออภัย ข้อมูลส่วนตัวไม่ถูกต้อง");
-                }
+//                try {
+//                    saveUserProfile();
+//                } catch (Exception e) {
+//                    message.alert("ขออภัย ข้อมูลส่วนตัวไม่ถูกต้อง");
+//                }
+//
+                AppBarLayout appbar = getActivity().findViewById(R.id.appbar);
+                appbar.setExpanded(true, true);
+
         }
     }
 
@@ -77,9 +105,17 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
     public void initView(View rootView) {
+        setHasOptionsMenu(true);
+
+        weightEdt = rootView.findViewById(R.id.weightEdt);
+        heightEdt = rootView.findViewById(R.id.heightEdt);
+        ageEdt = rootView.findViewById(R.id.ageEdt);
+
         gender_array = getResources().getStringArray(R.array.gender_array);
         genderSpinner = rootView.findViewById(R.id.genderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
@@ -100,10 +136,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         Button saveBtn = rootView.findViewById(R.id.saveBtn);
         clearBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
-
-        weightEdt = rootView.findViewById(R.id.weightEdt);
-        heightEdt = rootView.findViewById(R.id.heightEdt);
-        ageEdt = rootView.findViewById(R.id.ageEdt);
     }
 
     public void getUserProfile() {
@@ -126,6 +158,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         weightEdt.setText("", TextView.BufferType.EDITABLE);
         heightEdt.setText("", TextView.BufferType.EDITABLE);
         ageEdt.setText("", TextView.BufferType.EDITABLE);
+
         genderSpinner.setSelection(0);
         activitySpinner.setSelection(0);
 

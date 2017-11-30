@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +108,9 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 
     @Override
     public void onResume() {
@@ -129,6 +132,7 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         if(getView()!= null){
             foodList = foodDbAdapter.getData(tagFilter, specialFilter);
             previousRandomIndex = -1;
+
             foodNameTv.setText("");
             foodCalTv.setText("");
             findMoreBtn.setVisibility(View.GONE);

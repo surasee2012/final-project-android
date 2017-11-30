@@ -29,8 +29,6 @@ public class FoodListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_food_list, container, false);
 
-        setHasOptionsMenu(true);
-
         foodDbAdapter = new FoodDbAdapter(getContext());
         foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
 
@@ -52,6 +50,17 @@ public class FoodListFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Intent intent = new Intent(getContext(), AddEditActivity.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public boolean onContextItemSelected(MenuItem item) {
         String foodName = ((TextView) recyclerView.findViewHolderForAdapterPosition(item.getGroupId())
                 .itemView.findViewById(R.id.foodNameItem)).getText().toString();
@@ -68,6 +77,8 @@ public class FoodListFragment extends Fragment {
     }
 
     public void initView(View rootView) {
+        setHasOptionsMenu(true);
+
         recyclerView = rootView.findViewById(R.id.foodList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

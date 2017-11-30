@@ -88,7 +88,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
                         foodDbAdapter.setFavorite(foodList.get(position).getFood_ID(), 0);
                         foodList.get(position).setFood_Favorite(0);
                         Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
-                        message.setToast(context, "นำ" + foodList.get(position).getFood_Name() + "ออกจากของโปรดเรียบร้อยแล้ว");
+                        message.setToast(context, "ลบ" + foodList.get(position).getFood_Name() + "ออกจากของโปรดเรียบร้อยแล้ว");
                         break;
                 }
             }
@@ -99,7 +99,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
             Glide.with(context).load(noFavoriteImgId).into(favoriteImg);
         }
         foodHolder.foodNameItem.setText(foodList.get(position).getFood_Name());
-        foodHolder.foodCalItem.setText(Integer.toString(foodList.get(position).getFood_Calories()) + " แคลอรี่");
+        foodHolder.foodCalItem.setText(Integer.toString(foodList.get(position).getFood_Calories()) + " แคลอรี่/จาน");
     }
 
     @Override
