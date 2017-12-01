@@ -9,7 +9,6 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,14 +96,6 @@ public class RandomFragment extends Fragment implements View.OnClickListener,
         foodCalTv.setText("");
         findMoreBtn.setVisibility(View.GONE);
         recomResBtn.setVisibility(View.GONE);
-        if (foodList.isEmpty()) {
-            if (specialFilter.equals("แคลอรี่ที่เหมาะสม")) {
-                message.alert("ขออภัย คุณยังไม่ได้กรอกข้อมูลส่วนตัว หรือ ข้อมูลส่วนตัวไม่ถูกต้อง");
-            } else {
-                message.alert("ขออภัย ไม่มีรายการอาหารที่ตรงกับตัวเลือกของคุณ กรุณาเปลี่ยนตัวเลือกเพิ่มเติม");
-            }
-            vibrator.vibrate(200);
-        }
     }
 
     @Override

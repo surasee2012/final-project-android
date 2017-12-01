@@ -1,7 +1,6 @@
 package kmitl.project.surasee2012.eatrightnow.view;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,12 +19,10 @@ import kmitl.project.surasee2012.eatrightnow.preference.CommonSharePreference;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.UserProfile;
 
-public class ProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener,
-        View.OnClickListener {
+public class ProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private EditText weightEdt, heightEdt, ageEdt;
     private Spinner genderSpinner, activitySpinner;
-    private Button clearBtn;
 
     private CommonSharePreference preference;
     private Message message;
@@ -46,7 +42,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
 
         if (userProfile != null) {
             getUserProfile();
-            clearBtn.setVisibility(View.VISIBLE);
         } else  {
             userProfile = new UserProfile();
         }
@@ -71,25 +66,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
                 }
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.clearBtn:
-                clearUserProfile();
-                break;
-            case R.id.saveBtn:
-//                try {
-//                    saveUserProfile();
-//                } catch (Exception e) {
-//                    message.alert("ขออภัย ข้อมูลส่วนตัวไม่ถูกต้อง");
-//                }
-//
-                AppBarLayout appbar = getActivity().findViewById(R.id.appbar);
-                appbar.setExpanded(true, true);
-
         }
     }
 
@@ -131,11 +107,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner.setAdapter(adapter2);
         activitySpinner.setOnItemSelectedListener(this);
-
-        clearBtn = rootView.findViewById(R.id.clearBtn);
-        Button saveBtn = rootView.findViewById(R.id.saveBtn);
-        clearBtn.setOnClickListener(this);
-        saveBtn.setOnClickListener(this);
     }
 
     public void getUserProfile() {
@@ -150,20 +121,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         ArrayAdapter = (ArrayAdapter) activitySpinner.getAdapter();
         spinnerPosition = ArrayAdapter.getPosition(userProfile.getUserActivity());
         activitySpinner.setSelection(spinnerPosition);
-    }
-
-    public void clearUserProfile() {
-        preference.clear();
-
-        weightEdt.setText("", TextView.BufferType.EDITABLE);
-        heightEdt.setText("", TextView.BufferType.EDITABLE);
-        ageEdt.setText("", TextView.BufferType.EDITABLE);
-
-        genderSpinner.setSelection(0);
-        activitySpinner.setSelection(0);
-
-        clearBtn.setVisibility(View.GONE);
-        message.setToast(getContext(), "ล้างข้อมูลแล้ว");
     }
 
     public void saveUserProfile() throws Exception {
@@ -183,8 +140,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         userProfile.setAge(userAge);
 
         preference.save("UserProfile", userProfile);
-
-        clearBtn.setVisibility(View.VISIBLE);
         message.setToast(getContext(), "บันทึกแล้ว");
     }
 }

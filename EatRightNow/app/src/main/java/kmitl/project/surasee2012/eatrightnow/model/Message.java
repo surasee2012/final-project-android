@@ -23,7 +23,7 @@ public class Message {
 
     public void alert(String warning) {
         if (!alertDialog.isShowing()) {
-            alertDialog.setTitle("Alert");
+            alertDialog.setTitle("ระวัง");
             alertDialog.setMessage(warning);
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "ตกลง",
                     new DialogInterface.OnClickListener() {
