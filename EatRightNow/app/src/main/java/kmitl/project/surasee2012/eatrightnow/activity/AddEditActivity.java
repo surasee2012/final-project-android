@@ -182,9 +182,9 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void saveFoodData() {
+    public void saveFoodData() throws Exception {
         String action;
-        String foodName = foodNameEt.getText().toString();
+        String foodName = spaceLeadCheck(foodNameEt.getText().toString());
         Integer foodCal = Integer.parseInt(foodCalEt.getText().toString());
         Integer foodFav;
         if (favSwitch.isChecked()) {
@@ -218,5 +218,22 @@ public class AddEditActivity extends AppCompatActivity implements View.OnClickLi
 
         message.setToast(this, action + foodName + "สำเร็จแล้ว");
         finish();
+    }
+
+    public String spaceLeadCheck(String string) throws Exception{
+        boolean isSpaceLead = true;
+        String newString = "";
+        for (char c: string.toCharArray()) {
+            if (c != ' ') {
+                isSpaceLead = false;
+            }
+            if(!isSpaceLead) {
+                newString += c;
+            }
+        }
+        if (isSpaceLead) {
+            throw new Exception();
+        }
+        return newString;
     }
 }

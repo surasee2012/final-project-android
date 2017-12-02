@@ -3,24 +3,24 @@ package kmitl.project.surasee2012.eatrightnow.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.AgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.NullAgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.Over123AgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.ZeroAgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.AbnormalGenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.GenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.NullGenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.HeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.NullHeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Over272HeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Under55HeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userAgeValidator.UserAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userAgeValidator.NullUserAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userAgeValidator.Over123UserAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userAgeValidator.ZeroUserAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userGenderValidator.AbnormalUserGenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userGenderValidator.UserGenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userGenderValidator.NullUserGenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userHeightValidator.UserHeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userHeightValidator.NullUserHeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userHeightValidator.Over272UserHeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userHeightValidator.Under55UserHeightValidator;
 import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.NullUserActivityValidator;
 import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UndefinedUserActivityValidator;
 import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UserActivityValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.NullWeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.Over635WeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.WeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.ZeroWeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userWeightValidator.NullUserWeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userWeightValidator.Over635UserWeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userWeightValidator.UserWeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userWeightValidator.ZeroUserWeightValidator;
 
 public class UserProfile {
 
@@ -35,12 +35,12 @@ public class UserProfile {
     }
 
     public void setWeight(Double weight) throws Exception {
-        List<WeightValidator> weightValidators = new ArrayList<>();
-        weightValidators.add(new NullWeightValidator());
-        weightValidators.add(new ZeroWeightValidator());
-        weightValidators.add(new Over635WeightValidator());
-        for (WeightValidator weightValidator: weightValidators) {
-            if (!weightValidator.isValid(weight)) {
+        List<UserWeightValidator> userWeightValidators = new ArrayList<>();
+        userWeightValidators.add(new NullUserWeightValidator());
+        userWeightValidators.add(new ZeroUserWeightValidator());
+        userWeightValidators.add(new Over635UserWeightValidator());
+        for (UserWeightValidator userWeightValidator : userWeightValidators) {
+            if (!userWeightValidator.isValid(weight)) {
                 throw new Exception();
             }
         }
@@ -52,12 +52,12 @@ public class UserProfile {
     }
 
     public void setHeight(Double height) throws Exception {
-        List<HeightValidator> heightValidators = new ArrayList<>();
-        heightValidators.add(new NullHeightValidator());
-        heightValidators.add(new Under55HeightValidator());
-        heightValidators.add(new Over272HeightValidator());
-        for (HeightValidator heightValidator: heightValidators) {
-            if (!heightValidator.isValid(height)) {
+        List<UserHeightValidator> userHeightValidators = new ArrayList<>();
+        userHeightValidators.add(new NullUserHeightValidator());
+        userHeightValidators.add(new Under55UserHeightValidator());
+        userHeightValidators.add(new Over272UserHeightValidator());
+        for (UserHeightValidator userHeightValidator : userHeightValidators) {
+            if (!userHeightValidator.isValid(height)) {
                 throw new Exception();
             }
         }
@@ -69,12 +69,12 @@ public class UserProfile {
     }
 
     public void setAge(Integer age) throws Exception{
-        List<AgeValidator> ageValidators = new ArrayList<>();
-        ageValidators.add(new NullAgeValidator());
-        ageValidators.add(new ZeroAgeValidator());
-        ageValidators.add(new Over123AgeValidator());
-        for (AgeValidator ageValidator: ageValidators) {
-            if (!ageValidator.isValid(age)) {
+        List<UserAgeValidator> userAgeValidators = new ArrayList<>();
+        userAgeValidators.add(new NullUserAgeValidator());
+        userAgeValidators.add(new ZeroUserAgeValidator());
+        userAgeValidators.add(new Over123UserAgeValidator());
+        for (UserAgeValidator userAgeValidator: userAgeValidators) {
+            if (!userAgeValidator.isValid(age)) {
                 throw new Exception();
             }
         }
@@ -86,11 +86,11 @@ public class UserProfile {
     }
 
     public void setGender(String gender) throws Exception {
-        List<GenderValidator> genderValidators = new ArrayList<>();
-        genderValidators.add(new NullGenderValidator());
-        genderValidators.add(new AbnormalGenderValidator());
-        for (GenderValidator genderValidator: genderValidators) {
-            if (!genderValidator.isValid(gender)) {
+        List<UserGenderValidator> userGenderValidators = new ArrayList<>();
+        userGenderValidators.add(new NullUserGenderValidator());
+        userGenderValidators.add(new AbnormalUserGenderValidator());
+        for (UserGenderValidator userGenderValidator : userGenderValidators) {
+            if (!userGenderValidator.isValid(gender)) {
                 throw new Exception();
             }
         }

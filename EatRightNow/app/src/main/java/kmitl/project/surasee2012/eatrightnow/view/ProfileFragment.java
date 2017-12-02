@@ -14,31 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.preference.CommonSharePreference;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.UserProfile;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.AgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.NullAgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.Over123AgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.ZeroAgeValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.AbnormalGenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.GenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.NullGenderValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.HeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.NullHeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Over272HeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Under55HeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.NullUserActivityValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UndefinedUserActivityValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UserActivityValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.NullWeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.Over635WeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.WeightValidator;
-import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.ZeroWeightValidator;
 
 public class ProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
