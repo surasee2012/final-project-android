@@ -14,10 +14,31 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.preference.CommonSharePreference;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.model.UserProfile;
+import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.AgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.NullAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.Over123AgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.ageValidator.ZeroAgeValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.AbnormalGenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.GenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.genderValidator.NullGenderValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.HeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.NullHeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Over272HeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.heightValidator.Under55HeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.NullUserActivityValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UndefinedUserActivityValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.userActivityValidator.UserActivityValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.NullWeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.Over635WeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.WeightValidator;
+import kmitl.project.surasee2012.eatrightnow.validator.weightValidator.ZeroWeightValidator;
 
 public class ProfileFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -27,6 +48,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     private CommonSharePreference preference;
     private Message message;
     private UserProfile userProfile;
+    private String userGender, userActivity;
     private String[] gender_array, activity_array;
 
     @Override
@@ -73,10 +95,10 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         switch (adapterView.getId()) {
             case R.id.genderSpinner:
-                userProfile.setGender(gender_array[i]);
+                userGender = gender_array[i];
                 break;
             case R.id.activitySpinner:
-                userProfile.setUserActivity(activity_array[i]);
+                userActivity = activity_array[i];
         }
     }
 
@@ -128,18 +150,63 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         Double userHeight = Double.parseDouble(heightEdt.getText().toString());
         Integer userAge = Integer.parseInt(ageEdt.getText().toString());
 
-        if (userWeight == null || userWeight == 0 || userWeight > 635 || userHeight == null || userHeight < 55
-                || userHeight > 272 || userAge == null || userAge == 0 || userAge > 123
-                || userProfile.getGender() == null || userProfile.getGender().equals("ยังไม่ระบุ")
-                || userProfile.getUserActivity() == null || userProfile.getUserActivity().equals("ยังไม่ระบุ")) {
-            throw new Exception();
-        }
-
         userProfile.setWeight(userWeight);
         userProfile.setHeight(userHeight);
         userProfile.setAge(userAge);
+        userProfile.setGender(userGender);
+        userProfile.setUserActivity(userActivity);
 
         preference.save("UserProfile", userProfile);
         message.setToast(getContext(), "บันทึกแล้ว");
     }
+
+//    public void validate(Double userWeight,Double userHeight, Integer userAge) throws Exception {
+//        List<WeightValidator> weightValidators = new ArrayList<>();
+//        weightValidators.add(new NullWeightValidator());
+//        weightValidators.add(new ZeroWeightValidator());
+//        weightValidators.add(new Over635WeightValidator());
+//        for (WeightValidator weightValidator: weightValidators) {
+//            if (!weightValidator.isValid(userWeight)) {
+//                throw new Exception();
+//            }
+//        }
+//
+//        List<HeightValidator> heightValidators = new ArrayList<>();
+//        heightValidators.add(new NullHeightValidator());
+//        heightValidators.add(new Under55HeightValidator());
+//        heightValidators.add(new Over272HeightValidator());
+//        for (HeightValidator heightValidator: heightValidators) {
+//            if (!heightValidator.isValid(userHeight)) {
+//                throw new Exception();
+//            }
+//        }
+//
+//        List<AgeValidator> ageValidators = new ArrayList<>();
+//        ageValidators.add(new NullAgeValidator());
+//        ageValidators.add(new ZeroAgeValidator());
+//        ageValidators.add(new Over123AgeValidator());
+//        for (AgeValidator ageValidator: ageValidators) {
+//            if (!ageValidator.isValid(userAge)) {
+//                throw new Exception();
+//            }
+//        }
+//
+//        List<GenderValidator> genderValidators = new ArrayList<>();
+//        genderValidators.add(new NullGenderValidator());
+//        genderValidators.add(new AbnormalGenderValidator());
+//        for (GenderValidator genderValidator: genderValidators) {
+//            if (!genderValidator.isValid(userProfile.getGender())) {
+//                throw new Exception();
+//            }
+//        }
+//
+//        List<UserActivityValidator> userActivityValidators = new ArrayList<>();
+//        userActivityValidators.add(new NullUserActivityValidator());
+//        userActivityValidators.add(new UndefinedUserActivityValidator());
+//        for (UserActivityValidator userActivityValidator: userActivityValidators) {
+//            if (!userActivityValidator.isValid(userProfile.getUserActivity())) {
+//                throw new Exception();
+//            }
+//        }
+//    }
 }
