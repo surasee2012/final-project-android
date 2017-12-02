@@ -8,60 +8,120 @@ import static org.junit.Assert.assertEquals;
 
 public class UserProfileTest {
     @Test(expected = Exception.class)
-    public void nullWeightSetTest() throws Exception{
+    public void nullWeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double weight = null;
-        userProfile.setWeight(weight);
+        userProfile.setWeight(null);
     }
 
     @Test(expected = Exception.class)
-    public void zeroWeightTest() throws Exception{
+    public void zeroWeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double weight = 0.0;
-        userProfile.setWeight(weight);
+        userProfile.setWeight(0.0);
     }
 
     @Test(expected = Exception.class)
-    public void over635WeightTest() throws Exception{
+    public void over635WeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double weight = 636.0;
-        userProfile.setWeight(weight);
+        userProfile.setWeight(636.0);
     }
 
     @Test
-    public void normalWeightTest() throws Exception{
+    public void normalWeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
+        userProfile.setWeight(63.0);
         Double weight = 63.0;
-        userProfile.setWeight(weight);
         assertEquals(weight, userProfile.getWeight());
     }
 
     @Test(expected = Exception.class)
-    public void nullHeightSetTest() throws Exception{
+    public void nullHeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double height = null;
-        userProfile.setHeight(height);
+        userProfile.setHeight(null);
     }
 
     @Test(expected = Exception.class)
-    public void under55HeightTest() throws Exception{
+    public void under55HeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double height = 43.0;
-        userProfile.setHeight(height);
+        userProfile.setHeight(43.0);
     }
 
     @Test(expected = Exception.class)
-    public void over272HeightTest() throws Exception{
+    public void over272HeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
-        Double height = 273.0;
-        userProfile.setHeight(height);
+        userProfile.setHeight(273.0);
     }
 
     @Test
-    public void normalHeightTest() throws Exception{
+    public void normalHeightSetTest() throws Exception {
         UserProfile userProfile = new UserProfile();
+        userProfile.setHeight(174.0);
         Double height = 174.0;
-        userProfile.setHeight(height);
         assertEquals(height, userProfile.getHeight());
+    }
+
+    @Test(expected = Exception.class)
+    public void nullAgeSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setAge(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void zeroAgeSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setAge(0);
+    }
+
+    @Test(expected = Exception.class)
+    public void over123AgeSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setAge(124);
+    }
+
+    @Test
+    public void normalAgeSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setAge(24);
+        Integer age = 24;
+        assertEquals(age, userProfile.getAge());
+    }
+
+    @Test(expected = Exception.class)
+    public void nullGenderSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setGender(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void abnormalGenderSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setGender("กระเทย");
+    }
+
+    @Test
+    public void normalGenderSetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setGender("ชาย");
+        String gender = "ชาย";
+        assertEquals(gender, userProfile.getGender());
+    }
+
+    @Test(expected = Exception.class)
+    public void nullUserActivitySetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUserActivity(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void undefinedUserActivitySetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUserActivity("นอนเฉย ๆ ไปวัน ๆ");
+    }
+
+    @Test
+    public void normalUserActivitySetTest() throws Exception {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUserActivity("เคลื่อนไหวตลอดเวลา");
+        String userActivity = "เคลื่อนไหวตลอดเวลา";
+        assertEquals(userActivity, userProfile.getUserActivity());
     }
 }
