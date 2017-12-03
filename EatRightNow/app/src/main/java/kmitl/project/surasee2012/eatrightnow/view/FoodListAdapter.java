@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import kmitl.project.surasee2012.eatrightnow.R;
 import kmitl.project.surasee2012.eatrightnow.sqliteDB.FoodDbAdapter;
-import kmitl.project.surasee2012.eatrightnow.model.FoodListItems;
+import kmitl.project.surasee2012.eatrightnow.model.FoodListItem;
 import kmitl.project.surasee2012.eatrightnow.model.Message;
 
 class FoodHolder extends RecyclerView.ViewHolder {
@@ -38,7 +38,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
 
     private FoodDbAdapter foodDbAdapter;
     private Message message;
-    private ArrayList<FoodListItems> foodList;
+    private ArrayList<FoodListItem> foodList;
     private int favoriteImgId;
     private int noFavoriteImgId;
 
@@ -107,7 +107,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodHolder> {
         return foodList.size();
     }
 
-    public void update(ArrayList<FoodListItems> foodList) {
+    public void update(ArrayList<FoodListItem> foodList) {
         this.foodList = foodList;
         notifyDataSetChanged();
     }

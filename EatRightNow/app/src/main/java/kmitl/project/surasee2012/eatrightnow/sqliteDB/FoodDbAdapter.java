@@ -14,7 +14,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 import kmitl.project.surasee2012.eatrightnow.model.FoodItemWithTagsAndRes;
-import kmitl.project.surasee2012.eatrightnow.model.FoodListItems;
+import kmitl.project.surasee2012.eatrightnow.model.FoodListItem;
 import kmitl.project.surasee2012.eatrightnow.model.FoodRandomItem;
 import kmitl.project.surasee2012.eatrightnow.model.UserProfile;
 import kmitl.project.surasee2012.eatrightnow.preference.CommonSharePreference;
@@ -30,20 +30,20 @@ public class FoodDbAdapter {
         this.context = context;
     }
 
-    public ArrayList<FoodListItems> getData() {
+    public ArrayList<FoodListItem> getData() {
         String query = "SELECT * FROM Foods";
         Cursor c1 = FoodDB.rawQuery(query);
-        ArrayList<FoodListItems> foodList = new ArrayList<>();
+        ArrayList<FoodListItem> foodList = new ArrayList<>();
 
         if (c1 != null && c1.getCount() != 0) {
             if (c1.moveToFirst()) {
                 do {
-                    FoodListItems foodListItems = new FoodListItems();
-                    foodListItems.setFood_ID(c1.getInt(c1.getColumnIndex("Food_ID")));
-                    foodListItems.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
-                    foodListItems.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
-                    foodListItems.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
-                    foodList.add(foodListItems);
+                    FoodListItem foodListItem = new FoodListItem();
+                    foodListItem.setFood_ID(c1.getInt(c1.getColumnIndex("Food_ID")));
+                    foodListItem.setFood_Name(c1.getString(c1.getColumnIndex("Food_Name")));
+                    foodListItem.setFood_Calories(c1.getInt(c1.getColumnIndex("Food_Calories")));
+                    foodListItem.setFood_Favorite(c1.getInt(c1.getColumnIndex("Food_Favorite")));
+                    foodList.add(foodListItem);
                 } while (c1.moveToNext());
             }
         }
@@ -254,6 +254,17 @@ public class FoodDbAdapter {
     public void deleteTags(int foodID) {
         String DeleteQuery = "DELETE FROM Foods_Tags WHERE Food_ID = " + foodID + ";";
         FoodDB.execute(DeleteQuery);
+    }
+
+    public void revertDefaultDatabase() {
+        String Query = "DELETE FROM Foods_Tags WHERE Food_ID > " + 146 + ";";
+        FoodDB.execute(Query);
+        Query = "DELETE FROM Foods WHERE Food_ID > " + 146 + ";";
+        FoodDB.execute(Query);
+        Query = "UPDATE Foods SET Food_Favorite = 0;";
+        FoodDB.execute(Query);
+        Query = "UPDATE Foods SET Food_Restaurant = null;";
+        FoodDB.execute(Query);
     }
 
     static class FoodDB extends SQLiteOpenHelper {

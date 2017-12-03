@@ -33,19 +33,19 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
+                android:id="@+id/tabRandom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/สุ่มอาหาร" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+                android:id="@+id/tabFoodList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/food_list" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
+                android:id="@+id/tabProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile" />
