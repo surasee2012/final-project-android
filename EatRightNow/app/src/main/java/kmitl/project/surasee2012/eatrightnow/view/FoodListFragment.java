@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import kmitl.project.surasee2012.eatrightnow.activity.AddEditActivity;
 import kmitl.project.surasee2012.eatrightnow.R;
+import kmitl.project.surasee2012.eatrightnow.model.Message;
 import kmitl.project.surasee2012.eatrightnow.sqliteDB.FoodDbAdapter;
 
 public class FoodListFragment extends Fragment {
@@ -23,6 +24,7 @@ public class FoodListFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private FoodDbAdapter foodDbAdapter;
+    private Message message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +32,7 @@ public class FoodListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_food_list, container, false);
 
         foodDbAdapter = new FoodDbAdapter(getContext());
+        message = new Message(getContext());
         foodListAdapter = new FoodListAdapter(getContext(), foodDbAdapter);
 
         initView(rootView);
@@ -71,6 +74,7 @@ public class FoodListFragment extends Fragment {
                 break;
             case 1:
                 deleteFoodItem(item.getGroupId(), foodID);
+                message.setToast(getContext(), "ลบ"+ foodName + "สำเร็จแล้ว");
                 break;
         }
         return super.onContextItemSelected(item);
